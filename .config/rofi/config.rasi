@@ -1,0 +1,9 @@
+configuration {
+font: "MesloLGS NF 12";
+modi: "drun,window,run,ssh,combi";
+/* Dark theme.*/
+theme: "~/.cache/wal/colors-rofi-dark.rasi";
+
+/* Light theme. idk why this is here, things still switch properly*/
+/*theme: "~/.cache/wal/colors-rofi-light.rasi";*/
+}
