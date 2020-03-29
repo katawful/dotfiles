@@ -2,15 +2,19 @@
 
 case "$1" in
 	logout)
+		echo "empty" > ~/.config/i3/current-theme
 		i3-msg exit
 		;;
 	suspend)
+		echo "empty" > ~/.config/i3/current-theme
 		systemctl suspend
 		;;
 	reboot)
+		echo "empty" > ~/.config/i3/current-theme
 		systemctl reboot
 		;;
 	shutdown)
+		echo "empty" > ~/.config/i3/current-theme
 		systemctl poweroff
 		;;
 	*)

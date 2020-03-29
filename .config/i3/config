@@ -29,6 +29,10 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # change color at startup with wal
 exec --no-startup-id $HOME/.config/i3/mode.sh
 
+# run the update script every 10 minutes from startup and run it at start
+exec --no-startup-id ~/.config/i3/mode.sh
+exec_always --no-startup-id watch -n 600 ~/.config/i3/mode.sh
+
 # Screenshots through Spectacle:
 # active window
 #bindsym $mod+Print exec --no-startup-id escrotum -s /%T? %Y-%M-%D_%H-%m-%S
@@ -48,10 +52,10 @@ mode "$mode_screen-capture" {
 bindsym $mod+Print mode "$mode_screen-capture"
 
 # display rules
-set $monitor_one "DisplayPort-2"
+set $monitor_one "DisplayPort-1"
 exec --no-startup-id xrandr --output $monitor_one --primary
 # change monitor position
-exec --no-startup-id xrandr --output HDMI-A-2 --auto --left-of DisplayPort-2
+exec --no-startup-id xrandr --output HDMI-A-2 --auto --left-of DisplayPort-1
 
 # open apps from shortcut
 # open ranger from command

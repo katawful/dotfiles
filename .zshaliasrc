@@ -29,3 +29,5 @@ alias run-site='cd ~/katawful.github.io/ && rake build'
 # git stuff
 alias grmdc='git rm --cached -r'
 alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
+alias dggp='git --git-dir ~/.dotfiles/.git --work-tree=$HOME push origin master'
+
