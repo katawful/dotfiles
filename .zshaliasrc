@@ -1,0 +1,31 @@
+# For Oblivion modding
+alias wrye-mod='bash ~/Scripts/wrye-bash-modding'
+
+# pacman shortcuts
+alias aursearch='trizen -Ss'
+alias aurinstall='trizen -S'
+
+# sc-controller daemon controls
+alias sc-off='scc-daemon stop'
+alias sc-on='scc-daemon start'
+
+# service restart script
+alias service-restart='bash ~/Scripts/service-restart'
+
+# since i can't type vim at all
+alias cim='nvim'
+alias vim='nvim'
+
+# redshift alias so i don't have to type is all out
+alias night-light='redshift -P -O 3500'
+alias day-light='redshift -P -O 5700'
+
+# i3 config alias
+alias i3config='vim ~/.config/i3/config'
+
+# local jekyll site
+alias run-site='cd ~/katawful.github.io/ && rake build'
+
+# git stuff
+alias grmdc='git rm --cached -r'
+alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
