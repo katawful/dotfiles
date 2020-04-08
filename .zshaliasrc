@@ -1,6 +1,9 @@
 # For Oblivion modding
 alias wrye-mod='bash ~/Scripts/wrye-bash-modding'
 
+# zsh shortcuts
+alias :q='exit'
+
 # pacman shortcuts
 alias aursearch='trizen -Ss'
 alias aurinstall='trizen -S'
@@ -31,3 +34,5 @@ alias grmdc='git rm --cached -r'
 alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
 alias dggp='git --git-dir ~/.dotfiles/.git --work-tree=$HOME push origin master'
 
+# my mode stuff
+alias light-mode='sh ~/.config/i3/mode.sh'
