@@ -4,7 +4,7 @@
 
 wal --theme base16-gruvbox-soft -l
 redshift -PO 5700
-echo "day" > /home/kat/.config/i3/current-theme
+echo "day" > /tmp/theme
 # change conky theme
 rm /home/kat/.config/conky/conky.conf
 cp /home/kat/.config/conky/conky-light.conf /home/kat/.config/conky/conky.conf

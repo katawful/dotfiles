@@ -15,14 +15,14 @@ MONT=$(date +"%m")
 DAY=$(date +"%d")
 TIME=$(date +"%T")
 # combine them how i want to
-FILE="$YEAR-$MONT-$DAY~$TIME"
+FILE=$YEAR-$MONT-$DAY_$TIME
 
-if ls ~/Pictures/$NAME ; then 
-	cd ~/Pictures/$NAME
+if ls "/home/kat/Pictures/$NAME" ; then 
+	cd "/home/kat/Pictures/$NAME"
 	scrot -u $FILE.png
 else
-	mkdir ~/Pictures/$NAME
-	cd ~/Pictures/$NAME
+	mkdir "/home/kat/Pictures/$NAME"
+	cd "/home/kat/Pictures/$NAME"
 	scrot -u $FILE.png
 fi
 

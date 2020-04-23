@@ -7,6 +7,7 @@ alias :q='exit'
 # pacman shortcuts
 alias aursearch='trizen -Ss'
 alias aurinstall='trizen -S'
+alias pacsearch='pacman -Q | grep'
 
 # sc-controller daemon controls
 alias sc-off='scc-daemon stop'
@@ -27,7 +28,7 @@ alias day-light='redshift -P -O 5700'
 alias i3config='vim ~/.config/i3/config'
 
 # local jekyll site
-alias run-site='cd ~/katawful.github.io/ && rake build'
+alias run-site='cd ~/Programming/katawful.github.io/ && rake build'
 
 # git stuff
 alias grmdc='git rm --cached -r'
@@ -36,3 +37,6 @@ alias dggp='git --git-dir ~/.dotfiles/.git --work-tree=$HOME push origin master'
 
 # my mode stuff
 alias light-mode='sh ~/.config/i3/mode.sh'
+
+# search fonts
+alias fonts='fc-list | grep'
