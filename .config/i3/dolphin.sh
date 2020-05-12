@@ -11,5 +11,4 @@ sleep 2s
 xdotool search --name "HLE" set_window --classname "dolphin-emu" set_window --class "dolphin-emu"
 # make sure said window is active
 xdotool search --class "dolphin-emu" windowactivate
-# move window to the Game workspace via i3
-i3-msg move container to workspace Game
+

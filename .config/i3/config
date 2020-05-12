@@ -30,13 +30,13 @@ set_from_resource        $purple  i3wm.color13  #f0f0f0
 set_from_resource        $teal    i3wm.color6   #f0f0f0             
 set_from_resource        $gray    i3wm.color7   #f0f0f0             
 set_from_resource        $l-gray  i3wm.color8   #f0f0f0             
-#
-#client.type             border   background  text  indicator  childborder
-#
-client.focused           $green   $green      $fg   $orange    
-client.focused_inactive  $l-gray  $l-gray     $fg   $l-gray    
-client.urgent            $red     $red        $fg   $red       
-client.unfocused         $gray    $gray       $fg   $gray      
+#                                                                   
+#client.type             border   background    text     indicator  childborder
+#                                                                   
+client.focused           $green   $green        $fg      $orange    
+client.focused_inactive  $l-gray  $l-gray       $fg      $l-gray    
+client.urgent            $red     $red          $fg      $red       
+client.unfocused         $gray    $gray         $fg      $gray      
 
 
 ## Displays
@@ -53,6 +53,9 @@ exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
 
 
 ## Autostart
+#
+# map tablet to primary screen at start
+exec --no-startup-id $HOME/.config/i3/tablet.sh
 #
 # apply wallpaper at start
 exec --no-startup-id nitrogen --restore &
@@ -85,6 +88,11 @@ gaps outer 5
 
 
 ## Workspaces
+##
+# game workspace
+set $gam "Game"
+workspace $gam output $monitor_one
+bindsym $mod+F2 workspace $gam
 #
 # steam rules to keep it in its place
 set $ste "Steam"
@@ -92,10 +100,10 @@ workspace $ste output $monitor_one
 bindsym $mod+F3 workspace $ste
 assign [class="^Steam$" instance="^Steam$"] $ste
 #
-# game workspace
-set $gam "Game"
-workspace $gam output $monitor_one
-bindsym $mod+F2 workspace $gam
+# scratch workspace for stuff i need to keep open
+set $scr "Scratch"
+workspace $scr output $monitor_one
+bindsym $mod+F4 workspace $scr
 #
 # create variables for unamed workspaces for primary monitor
 set $ws1 "1"
@@ -162,9 +170,24 @@ workspace "Second Monitor" output $monitor_two
 # 
 # switch to that workspace
 bindsym $mod+grave workspace "Second Monitor"
+#
+# move to scratch workspace
+bindsym $mod+Shift+F4 move container to workspace $scr
 
 
 ## Hotkeys
+#
+# create a mark
+bindsym $mod+m exec --no-startup-id $HOME/.config/i3/menu.sh --create-mark
+#
+# list marks
+bindsym $mod+apostrophe exec --no-startup-id $HOME/.config/i3/menu.sh --marks
+#
+# search active windows with dmenu
+bindsym $mod+g exec --no-startup-id $HOME/.config/i3/menu.sh --active
+#
+# open certain configurations
+bindsym $mod+Shift+d exec --no-startup-id $HOME/.config/i3/menu.sh --open
 #
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -219,7 +242,7 @@ bindsym $mod+n split h
 bindsym $mod+v split v
 #
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle
 #
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -248,7 +271,7 @@ bindsym $mod+c focus child
 bindsym $mod+o exec --no-startup-id kitty "ranger"
 #
 # open firefox
-bindsym $mod+Shift+f exec --no-startup-id firefox
+bindsym $mod+f exec --no-startup-id firefox
 #
 # open htop
 bindsym $mod+p exec --no-startup-id ~/.config/i3/htop.sh
@@ -265,28 +288,29 @@ bindsym $mod+F9 exec --no-startup-id pavucontrol
 for_window [class="Pavucontrol" instance="pavucontrol" title="Volume Control"] floating enable
 #
 # TES Construction Set rules for more reasonable usage - namely tabbed instance so less floating fighting
-for_window [class="^Wine$" instance="^tesconstructionset.exe$" title="^Object Window$"] floating disable, title_format "<b>%title</b>"
-for_window [class="^Wine$" instance="^tesconstructionset.exe$" title="^Cell View$"] floating disable, title_format "<b>%title</b>"
-for_window [class="^Wine$" instance="^tesconstructionset.exe$" title="^Render Window$"] floating disable, title_format "<b>%title</b>"
-for_window [class="^Wine$" instance="^tesconstructionset.exe$" title="^TES Construction Set$"] floating disable, title_format "<b>%title</b>"
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Object Window$"] floating disable, title_format "<b>%title</b>"
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Cell View$"] floating disable, title_format "<b>%title</b>"
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Render Window$"] floating disable, title_format "<b>%title</b>"
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^TES Construction Set$"] floating disable, title_format "<b>%title</b>"
 	# the above are the main windows in question and shouldn't be floating, 
 	# tertiary windows like preferences or the landscape tools should be floating and rest on top
-for_window [class="^Wine$" instance="^tesconstructionset.exe$"] layout tabbed
-for_window [class="^Wine$" instance="^tesconstructionset.exe$"] title_format "|<b>%title</b>|"
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] layout tabbed
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] title_format "|<b>%title</b>|"
 	# run the CS in tabs with a modified title
 
 
 ## Game Rules
 # these open up the apps in the desired workspace
 #
+# Oblivion
+assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $gam
+#
 # Dolphin-emu
 assign [class="^dolphin-emu$" instance="^dolphin-emu$"] $gam
+for_window [class="dolphin-emu"] move to workspace $gam
 #
 # bsnes
 assign [class="Hiro" instance="hiro"] $gam
-#
-# Oblivion
-assign [class="^Wine$" instance="^oblivion.exe$"] $gam
 #
 # DUSK
 assign [class="^DUSK.x86_64$" instance="^DUSK.x86_64$"] $gam
@@ -307,6 +331,10 @@ assign [class="^DaggerfallUnity.x86_64$" title="^Daggerfall Unity$"] $gam
 # Fallout 76
 for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] move to workspace $gam
 for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] floating disable
+#
+# Minecraft - class is version dependent so I'll have to fix that somehow
+assign [class="Minecraft 1.15.2" instance="Minecraft 1.15.2"] $gam
+for_window [class="minecraft-launcher" instance="Minecraft Launcher" title="Minecraft Launcher"] move to workspace $gam
 
 
 ## Modes

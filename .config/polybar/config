@@ -15,7 +15,7 @@ gray       = ${xrdb:color8:#222}
 monitor=${env:MONITOR}
 ; Size
 width  = 100%
-height = 30
+height = 26
 
 ; Offset
 ;offset-x = 50%
@@ -25,7 +25,7 @@ height = 30
 bottom = true
 
 ; Radius
-radius = 0
+radius = 6
 
 ; Align modules fixed to middle
 fixed-center = true
@@ -51,13 +51,13 @@ module-margin-left  = 0
 module-margin-right = 0
 
 ; Font
-font-0 = Iosevka:size=9;2
+font-0 = firacode nerd font:size=9;2
 font-1 = Font Awesome 5 Free Solid:size=10;2
-font-2 = siji:pixelsize=15;1
-font-3 = materialicons:size=18;1
+font-2 = siji:pixelsize=15;2
+font-3 = materialicons:size=18;2
 
 ; Modlues
-modules-left   = updates-arch-aur i3 xwindow
+modules-left   = updates-arch-aur i3 window-script
 modules-center = time date
 modules-right  = memory cpu eth pulseaudio system-cpu-temppercore 
 tray-position = right
@@ -70,13 +70,22 @@ cursor-scroll = ns-resize
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
+
+[module/window-script]
+type = custom/script
+exec =~/.config/i3/menu.sh --window-name
+tail = true
+interval = 0
+label-padding = 1
+label-background = ${colors.gray}
+
 [module/updates-arch-aur]
 type = custom/script
 exec = ~/.config/polybar/scripts/updates-arch-aur.sh
 interval = 1200
 label-background = ${colors.red}
 label-foreground = ${colors.gray}
-label-padding    = 2
+label-padding    = 1
 
 [module/system-bluetooth-bluetoothctl]
 type = custom/script
@@ -85,7 +94,7 @@ tail = true
 click-left = ~/.config/polybar/scripts/system-bluetooth-bluetoothctl.sh --toggle &
 label-background = ${colors.red}
 label-foreground = ${colors.gray}
-label-padding    = 2
+label-padding    = 1
 
 [module/battery-dualshock4]
 type = custom/script
@@ -93,55 +102,46 @@ exec = ~/.config/polybar/scripts/info-dualshock4.sh
 interval = 10
 label-background = ${colors.red}
 label-foreground = ${colors.gray}
-label-padding    = 2
+label-padding    = 1
 
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
 wrapping-scroll = false
-
 ; Mouse click
 enable-click = true
-
 ; Mouse scroll
 enable-scroll = false
-
 ; Sort
 index-sort = true
-
 ; Display icons
 fuzzy-match = true
-
 ; Icons
-;ws-icon-0       = Main;
-;ws-icon-1       = Terminal;
-;ws-icon-2       = Web;
-;ws-icon-3       = Program;
-;ws-icon-4       = Design;
-;ws-icon-default = 
-
+ws-icon-0       = Discord;ﭮ
+ws-icon-1       = Game; 
+ws-icon-2       = Steam;
+ws-icon-3       = Second Monitor;
+ws-icon-4       = Scratch;
+ws-icon-default = ﲾ
 pin-workspaces = true
-
 ; Focused label
-label-focused            = %icon% %name%
+label-focused            = %icon%  %name%
 label-focused-background = ${colors.green}
 label-focused-foreground = ${colors.gray}
-label-focused-padding    = 2
-
-; Unfocused labels
-label-unfocused            = %icon% %name%
+label-focused-padding    = 1
+; Unfocused label
+label-unfocused            = %icon%  %name%
+label-unfocused-background = ${colors.background}
 label-unfocused-foreground = ${colors.foreground}
-label-unfocused-padding    = 2
-
+label-unfocused-padding    = 1
 ; Visible labels
-label-visible            = %icon% %name%
+label-visible            = %icon%  %name%
 label-visible-foreground = ${colors.foreground}
-label-visible-padding    = 2
-
+label-visible-padding    = 1
 ; Urgent labels
-label-urgent            = %icon% %name%
+label-urgent            = %icon%  %name%
 label-urgent-foreground = ${colors.red}
-label-urgent-padding    = 2
+label-urgent-padding    = 1
 
 [module/system-cpu-temppercore]
 type = custom/script
@@ -150,17 +150,14 @@ exec = ~/.config/polybar/scripts/system-cpu-temppercore.sh
 interval = 5
 label-background = ${colors.yellow}
 label-foreground = ${colors.gray}
-label-padding    = 2
+label-padding    = 1
 
 [module/weather]
 type = custom/script
-
 ; Script
 exec = /home/kat/.config/polybar/scripts/weather.sh
-
 ; Update interval
 interval = 600
-
 ; Label
 label            = %output%
 label-foreground = ${colors.foreground}
@@ -168,13 +165,10 @@ label-padding    = 1
 
 [module/time]
 type = internal/date
-
 ; Update interval
 interval = 1.0
-
 ; Format
 time = %I:%M%P
-
 ; Label
 label            =  %time%
 label-foreground = ${colors.foreground}
@@ -182,13 +176,10 @@ label-padding    = 1
 
 [module/date]
 type = internal/date
-
 ; Update interval
 interval = 1.0
-
 ; Format
 date = %A, %d %B
-
 ; Label
 label            = " %date%"
 label-foreground = ${colors.foreground}
@@ -197,17 +188,16 @@ label-padding    = 1
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:64:...%
-label-padding = 2
+label-padding = 1
 label-background = ${colors.gray}
 
 [module/filesystem]
 type = internal/fs
 interval = 25
-
 mount-0 = /home
 mount-1 = /run/media/HDD
-
 label-mounted = %{F#b16286}%mountpoint%%{F-}: %percentage_free%%
+label-mounted-background = ${colors.purple}
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.red}
 label-background = ${colors.purple}
@@ -215,23 +205,23 @@ label-background = ${colors.purple}
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = "  "
 format-prefix-background = ${colors.blue}
 format-prefix-foreground = ${colors.gray}
 label = CPU: %percentage:2%%
 label-background = ${colors.blue}
 label-foreground = ${colors.gray}
-label-padding = 2
+label-padding = 1
 
 [module/memory]
 type = internal/memory
 interval = 2
 format = <label>
 format-prefix-foreground = ${colors.purple}
-label = RAM: %gb_used%/%gb_total%
+label =  %gb_used%/%gb_total%
 label-background = ${colors.purple}
 label-foreground = ${colors.gray}
-label-padding = 2
+label-padding = 1
 
 [module/eth]
 type = internal/network
@@ -241,14 +231,14 @@ interval = 3.0
 format-connected-background = ${colors.teal}
 format-connected-prefix = "  "
 format-connected-prefix-foreground = ${colors.gray}
-label-connected = "Connected "
+label-connected = "Connected  "
 label-connected-foreground = ${colors.gray}
-label-padding = 2
+label-padding = 1
 
 ;format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = Disconnected :(
+label-disconnected = "Disconnected :(  "
 label-disconnected-foreground = ${colors.gray}
 
 [module/battery]
@@ -286,13 +276,13 @@ type = internal/temperature
 label            =  %temperature%
 label-background = ${colors.orange}
 label-foreground = ${colors.foreground}
-label-padding    = 2
+label-padding    = 1
 
 ; Warning label
 label-warn            =  %temperature%
 label-warn-background = ${colors.red}
 label-warn-foreground = ${colors.foreground}
-label-warn-padding    = 2
+label-warn-padding    = 1
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -301,13 +291,13 @@ type = internal/pulseaudio
 label-volume            =  %percentage%%
 label-volume-background = ${colors.green}
 label-volume-foreground = ${colors.gray}
-label-volume-padding    = 2
+label-volume-padding    = 1
 
 ; Muted label
 label-muted            =  Muted
 label-muted-background = ${colors.gray}
 label-muted-foreground = ${colors.foreground}
-label-muted-padding    = 2
+label-muted-padding    = 1
 
 [module/lock]
 type = custom/text
@@ -316,7 +306,7 @@ type = custom/text
 content = 
 content-background = ${colors.yellow}
 content-foreground = ${colors.foreground}
-content-padding    = 2
+content-padding    = 1
 
 ; Mouse click
 click-left = slock
@@ -328,7 +318,7 @@ type = custom/text
 content            = 
 content-background = ${colors.green}
 content-foreground = ${colors.foreground}
-content-padding    = 2
+content-padding    = 1
 
 ; Mouse click
 click-left = i3-msg exit
@@ -340,7 +330,7 @@ type = custom/text
 content            = 
 content-background = ${colors.red}
 content-foreground = ${colors.foreground}
-content-padding    = 2
+content-padding    = 1
 
 ; Mouse click
 click-left = poweroff
