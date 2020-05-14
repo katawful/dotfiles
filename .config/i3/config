@@ -8,7 +8,6 @@
 ## Game Rules
 ## Modes
 
-
 ## i3 Configs
 #
 # mod key
@@ -176,6 +175,10 @@ bindsym $mod+Shift+F4 move container to workspace $scr
 
 
 ## Hotkeys
+#
+# test for a reddit user
+#bindsym $mod+Shift+Ctrl+z exec urxvt -geometry 100x10 -name "floating_urxvt" -e sh -c 'egrep ^bind ~/.config/i3/config | cut -d '\'' '\'' -f 2- | sed '\''s/ /\t/'\'' | column -ts $'\''\t'\'' | pr -2 -w 145 -t | less'
+#for_window [class="URxvt" instance="floating_urxvt$"] floating toggle
 #
 # create a mark
 bindsym $mod+m exec --no-startup-id $HOME/.config/i3/menu.sh --create-mark
