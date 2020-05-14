@@ -1,12 +1,13 @@
 #!/bin/sh
 
-# this script contains all of my various dmenu related options and scripts
-# it gets expanded as I need it
-# i tried to do everything in dmenu with rofi for maximum compatibility
+# This script contains all of my various dmenu related options and scripts
+# It gets expanded as I need it
+# I tried to do everything in dmenu with rofi for maximum compatibility
 
 
 
-# this activates a dmenu that shows our active windows and lets us go to them
+## Show active windows
+# This activates a dmenu that shows our active windows and lets us go to them
 i3activewindow ()
 {
 	rownum=1				# start row at 1
@@ -30,7 +31,8 @@ i3activewindow ()
 	fi
 }
 
-# this gets the window name of the active window and prepends the mark name if it exists
+## Show window ID
+# This gets the window name of the active window and prepends the mark name if it exists
 i3windowid ()
 {
 	winstatus=$(xdotool getactivewindow)
@@ -88,8 +90,10 @@ i3windowid ()
 	fi
 }
 
-# this creates marks for our apps
-# this is mostly inspired/copied from EllaTheCat's i3 config
+## Create i3 Vim-like marks
+# This creates marks for our apps
+# This is mostly inspired/copied from EllaTheCat's i3 config
+# The marks are random 2 digit numbers
 i3createmark ()
 {
 	while : ; do
@@ -102,14 +106,17 @@ i3createmark ()
 	sleep 1 # No need for caller to wait for the window.
 	windowid=$(printf "0x%x" "$(xdotool getwindowfocus)")
 	i3-msg "[id=\"${windowid}\"] mark --toggle \"${id}\""
+	# NOTE toggle seems to be unfunctional, the script just makes a new mark
+	# not sure what the deal is
 	i3-msg "[con_mark=\"${id}\"] focus"
 }
 
-# this opens a dmenu to search through my marks
-# again mostly copied from EllaTheCat's config
+# Show i3 Vim-like marks
+# This opens a dmenu to search through my marks
+# Again mostly copied from EllaTheCat's config
 i3searchmark ()
 {
-	# ella mentions that jq has issues but seems ok for me
+	# Ella mentions that jq has issues but seems ok for me
 	menu="$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
 		grep -B1 -A1 "[[]" | tr -d "\\n["  | sed 's/--/\n/g')"
 	pair=$(echo "${menu}" | dmenu -i -l 6) 
@@ -121,7 +128,8 @@ i3searchmark ()
 	fi
 }
 
-# this opens up my modding setup
+## Launch Oblivion mod dev
+# This opens up my modding setup
 openmodding ()
 {
 	cd ~/Programming/oblivion-git && kitty "nvim" &
@@ -132,13 +140,15 @@ openmodding ()
 	
 }
 
-# this opens up my C++ studying setup
+## Launch C++ study setup
+# This opens up my C++ studying setup
 opencplusplus ()
 {
 	cd ~/Programming/My-Tests/C++/C++\ Primer\ Exerices && kitty "nvim" &
 }
 
-# this shows a menu of the things we can launch
+## Show launchable modes
+# This shows a menu of the things we can launch
 openthings ()
 {
 	choice=$(echo -e "Launch CSE\nLaunch C++ Studying" | dmenu -i -l 6)
@@ -150,7 +160,7 @@ openthings ()
 }
 
 
-# the things we can run
+# Run whatever function
 case "$1" in
 	(--active) i3activewindow ;;
 	(--window-name) i3windowid ;;

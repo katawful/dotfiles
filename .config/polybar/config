@@ -73,7 +73,7 @@ scroll-down = i3wm-wsprev
 
 [module/window-script]
 type = custom/script
-exec =~/.config/i3/menu.sh --window-name
+exec =~/.config/i3/i3-menus.sh --window-name
 tail = true
 interval = 0
 label-padding = 1

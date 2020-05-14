@@ -181,16 +181,16 @@ bindsym $mod+Shift+F4 move container to workspace $scr
 #for_window [class="URxvt" instance="floating_urxvt$"] floating toggle
 #
 # create a mark
-bindsym $mod+m exec --no-startup-id $HOME/.config/i3/menu.sh --create-mark
+bindsym $mod+m exec --no-startup-id $HOME/.config/i3/i3-menus.sh --create-mark
 #
 # list marks
-bindsym $mod+apostrophe exec --no-startup-id $HOME/.config/i3/menu.sh --marks
+bindsym $mod+apostrophe exec --no-startup-id $HOME/.config/i3/i3-menus.sh --marks
 #
 # search active windows with dmenu
-bindsym $mod+g exec --no-startup-id $HOME/.config/i3/menu.sh --active
+bindsym $mod+g exec --no-startup-id $HOME/.config/i3/i3-menus.sh --active
 #
 # open certain configurations
-bindsym $mod+Shift+d exec --no-startup-id $HOME/.config/i3/menu.sh --open
+bindsym $mod+Shift+d exec --no-startup-id $HOME/.config/i3/i3-menus.sh --open
 #
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -344,8 +344,8 @@ for_window [class="minecraft-launcher" instance="Minecraft Launcher" title="Mine
 # bluetooth management
 set $mode_bluetooth Bluetooth: (d) disconnect, (o) open-dluetoothctl
 mode "$mode_bluetooth" {
-	bindsym d exec --no-startup-id $HOME/.config/i3/bluetooth.sh disconnect, mode "default"
-	bindsym o exec --no-startup-id $HOME/.config/i3/bluetooth.sh open-bluetoothctl, mode "default"
+	bindsym d exec --no-startup-id $HOME/.config/i3/i3-modes.sh --bluetooth disconnect, mode "default"
+	bindsym o exec --no-startup-id $HOME/.config/i3/i3-modes.sh --bluetooth open-bluetoothctl, mode "default"
 	# return to normal mode
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -355,11 +355,11 @@ bindsym $mod+b mode "$mode_bluetooth"
 # screenshots through scrot
 set $mode_screen-capture (w) active-window, (1) screen-1, (2) screen-2, (r) rectangle, (a) all
 mode "$mode_screen-capture" {
-	bindsym w exec --no-startup-id $HOME/.config/i3/screen.sh, mode "default"
-	bindsym 1 exec --no-startup-id $HOME/.config/i3/capture-monitor.sh screen-1, mode "default"
-	bindsym 2 exec --no-startup-id $HOME/.config/i3/capture-monitor.sh screen-2, mode "default"
-	bindsym --release r exec --no-startup-id $HOME/.config/i3/capture-monitor.sh rectangle, mode "default"
-	bindsym a exec --no-startup-id $HOME/.config/i3/capture-monitor.sh all, mode "default"
+	bindsym w exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture active-window, mode "default"
+	bindsym 1 exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture screen-1, mode "default"
+	bindsym 2 exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture screen-2, mode "default"
+	bindsym --release r exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture rectangle, mode "default"
+	bindsym a exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture all, mode "default"
 	# return to normal mode
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -369,10 +369,10 @@ bindsym $mod+Print mode "$mode_screen-capture"
 # for i3 power management
 set $mode_system System (e) logout, (s) suspend, (r) reboot, (p) shutdown
 mode "$mode_system" {
-	bindsym e exec --no-startup-id ~/.config/i3/i3exit logout, mode "default"
-	bindsym s exec --no-startup-id ~/.config/i3/i3exit suspend, mode "default"
-	bindsym r exec --no-startup-id ~/.config/i3/i3exit reboot, mode "default"
-	bindsym p exec --no-startup-id ~/.config/i3/i3exit shutdown, mode "default"
+	bindsym e exec --no-startup-id ~/.config/i3/i3-modes.sh --exit logout, mode "default"
+	bindsym s exec --no-startup-id ~/.config/i3/i3-modes.sh --exit suspend, mode "default"
+	bindsym r exec --no-startup-id ~/.config/i3/i3-modes.sh --exit reboot, mode "default"
+	bindsym p exec --no-startup-id ~/.config/i3/i3-modes.sh --exit shutdown, mode "default"
 	# exit to normal mode
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
