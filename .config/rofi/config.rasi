@@ -6,4 +6,34 @@ theme: "~/.cache/wal/colors-rofi-dark.rasi";
 
 /* Light theme. idk why this is here, things still switch properly*/
 /*theme: "~/.cache/wal/colors-rofi-light.rasi";*/
+columns: 3;
+width: 800;
+lines: 10;
+kb-move-word-back: "Alt+b,Control+Left";
+kb-move-word-forward: "Alt+f,Control+Right";
+kb-move-char-back: "Left,Control+b";
+kb-move-char-forward: "Right,Control+f";
+kb-remove-word-back: "Control+Alt+h,Control+BackSpace";
+kb-remove-word-forward: "Control+Alt+d";
+kb-remove-char-forward: "Delete,Control+d";
+kb-remove-char-back: "BackSpace,Shift+BackSpace";
+kb-remove-to-eol: "";
+kb-remove-to-sol: "Control+u";
+kb-accept-entry: "Control+m,Return,KP_Enter";
+kb-accept-custom: "Control+Return";
+kb-accept-alt: "Shift+Return";
+kb-delete-entry: "Shift+Delete";
+kb-mode-next: "Shift+Right,Control+Tab";
+kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";
+kb-row-left: "Control+Page_Up,Super+h";
+kb-row-right: "Control+Page_Down,Super+l";
+kb-row-up: "Up,Control+p,ISO_Left_Tab,Super+k";
+kb-row-down: "Down,Control+n,Super+j";
+kb-row-tab: "Tab";
+kb-page-prev: "Page_Up";
+kb-page-next: "Page_Down";
+kb-row-first: "Home,KP_Home";
+kb-row-last: "End,KP_End";
+kb-row-select: "Control+space";
 }
+@import "gruvbox-common.rasi"

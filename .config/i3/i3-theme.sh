@@ -55,7 +55,7 @@ notheme ()
 
 day ()
 {
-	wal --theme base16-gruvbox-soft -l
+	wal --theme "/home/kat/.config/wal/colorschemes/light/base16-gruvbox-soft.json"
 	redshift -PO 5700
 	echo "day" > "/home/kat/.cache/wal/theme"
 	# change conky theme
@@ -65,7 +65,7 @@ day ()
 
 dusk ()
 {
-	wal --theme base16-gruvbox-soft
+	wal --theme "/home/kat/.config/wal/colorschemes/dark/base16-gruvbox-soft.json"
 	redshift -PO 5700
 	echo "dusk" > "/home/kat/.cache/wal/theme"
 	# change conky theme
@@ -75,7 +75,7 @@ dusk ()
 
 night ()
 {
-	wal --theme base16-gruvbox-soft
+	wal --theme "/home/kat/.config/wal/colorschemes/dark/base16-gruvbox-soft.json"
 	redshift -PO 3500
 	echo "night" > "/home/kat/.cache/wal/theme"
 	# change conky theme

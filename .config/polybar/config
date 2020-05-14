@@ -10,6 +10,7 @@ teal       = ${xrdb:color6:#222}
 ;theres no orange in the gruvbox pywal theme, use something else
 orange     = ${xrdb:color15:#222}
 gray       = ${xrdb:color8:#222}
+lgray	   = ${xrdb:color7:#222}
 
 [bar/mybar]
 monitor=${env:MONITOR}
@@ -77,7 +78,8 @@ exec =~/.config/i3/i3-menus.sh --window-name
 tail = true
 interval = 0
 label-padding = 1
-label-background = ${colors.gray}
+label-foreground = ${colors.foreground}
+label-background = ${colors.lgray}
 
 [module/updates-arch-aur]
 type = custom/script
@@ -127,7 +129,7 @@ pin-workspaces = true
 ; Focused label
 label-focused            = %icon%  %name%
 label-focused-background = ${colors.green}
-label-focused-foreground = ${colors.gray}
+label-focused-foreground = ${colors.foreground}
 label-focused-padding    = 1
 ; Unfocused label
 label-unfocused            = %icon%  %name%
@@ -149,7 +151,7 @@ exec = ~/.config/polybar/scripts/system-cpu-temppercore.sh
 ;exec = ~/temp-sensors
 interval = 5
 label-background = ${colors.yellow}
-label-foreground = ${colors.gray}
+label-foreground = ${colors.foreground}
 label-padding    = 1
 
 [module/weather]
@@ -207,10 +209,10 @@ type = internal/cpu
 interval = 2
 format-prefix = "  "
 format-prefix-background = ${colors.blue}
-format-prefix-foreground = ${colors.gray}
+format-prefix-foreground = ${colors.foreground}
 label = CPU: %percentage:2%%
 label-background = ${colors.blue}
-label-foreground = ${colors.gray}
+label-foreground = ${colors.foreground}
 label-padding = 1
 
 [module/memory]
@@ -220,7 +222,7 @@ format = <label>
 format-prefix-foreground = ${colors.purple}
 label =  %gb_used%/%gb_total%
 label-background = ${colors.purple}
-label-foreground = ${colors.gray}
+label-foreground = ${colors.foreground}
 label-padding = 1
 
 [module/eth]
@@ -230,16 +232,16 @@ interval = 3.0
 
 format-connected-background = ${colors.teal}
 format-connected-prefix = "  "
-format-connected-prefix-foreground = ${colors.gray}
+format-connected-prefix-foreground = ${colors.foreground}
 label-connected = "Connected  "
-label-connected-foreground = ${colors.gray}
+label-connected-foreground = ${colors.foreground}
 label-padding = 1
 
 ;format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = "Disconnected :(  "
-label-disconnected-foreground = ${colors.gray}
+label-disconnected-foreground = ${colors.foreground}
 
 [module/battery]
 type = internal/battery
@@ -290,12 +292,12 @@ type = internal/pulseaudio
 ; Volume label
 label-volume            =  %percentage%%
 label-volume-background = ${colors.green}
-label-volume-foreground = ${colors.gray}
+label-volume-foreground = ${colors.foreground}
 label-volume-padding    = 1
 
 ; Muted label
 label-muted            =  Muted
-label-muted-background = ${colors.gray}
+label-muted-background = ${colors.foreground}
 label-muted-foreground = ${colors.foreground}
 label-muted-padding    = 1
 

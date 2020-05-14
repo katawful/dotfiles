@@ -119,7 +119,9 @@ i3searchmark ()
 	# Ella mentions that jq has issues but seems ok for me
 	menu="$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
 		grep -B1 -A1 "[[]" | tr -d "\\n["  | sed 's/--/\n/g')"
-	pair=$(echo "${menu}" | dmenu -i -l 6) 
+	rows=$(echo "$menu" | wc -l)
+	echo "$rows"
+	pair=$(echo "${menu}" | dmenu -i -l $rows) 
 
 	for s in ${pair}; do mark=${s/,/}; done
 	if [ "_${mark}" != "_" ]; then
@@ -151,7 +153,7 @@ opencplusplus ()
 # This shows a menu of the things we can launch
 openthings ()
 {
-	choice=$(echo -e "Launch CSE\nLaunch C++ Studying" | dmenu -i -l 6)
+	choice=$(echo -e "Launch CSE\nLaunch C++ Studying" | dmenu -i -l 2)
 	if [[ $choice == "Launch CSE" ]]; then
 		openmodding
 	elif [[ $choice == "Launch C++ Studying" ]]; then

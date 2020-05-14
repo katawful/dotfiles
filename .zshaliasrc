@@ -36,7 +36,7 @@ alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
 alias dggp='git --git-dir ~/.dotfiles/.git --work-tree=$HOME push origin master'
 
 # my mode stuff
-alias light-mode='sh ~/.config/i3/mode.sh'
+alias light-mode='sh ~/.config/i3/i3-theme.sh'
 
 # search fonts
 alias fonts='fc-list | grep'
