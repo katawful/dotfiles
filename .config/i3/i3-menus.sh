@@ -21,7 +21,8 @@ i3activewindow ()
 		# increment row number to complete condition
 		rownum=$(($rownum+1))
 	done
-	choice=$(echo -e "$listwin" | dmenu -i -l 6)	# offload list to a choice
+	rows=$(($rownum / 2))			# get number of rows split in 2 to make rofi look pretty
+	choice=$(echo -e "$listwin" | dmenu -i -l $rows)	# offload list to a choice
 	winid=$(xdotool search --name "$choice") # get the window id so we can activate it
 	if [ -z "$choice" ]; then		# if we didn't choose anything, this stops the script from exiting in an error
 		exit 1
