@@ -18,10 +18,10 @@ htop ()
 conky ()
 {
 	#set window title
-	echo -ne "\033]0;"conky"\007"
+	#echo -ne "\033]0;"conky"\007"
 
 	#runs conky with my custom menu in terminal
-	conky -c ~/.config/conky/conky.conf
+	conky -c "/home/kat/.config/conky/conky.conf"
 }
 
 ## Launch games with Dolphin
@@ -29,7 +29,6 @@ conky ()
 # The default GUI command options suck
 dolphin ()
 {
-	echo "$@ $2 $3"
 	FILE=$3 # filename
 	SYS=$2 # system
 
@@ -38,15 +37,23 @@ dolphin ()
 	# wait two seconds
 	sleep 2s
 	# set the window class to "dolphin-emu"
-	echo "1"
 	xdotool search --name "HLE" set_window --classname "dolphin-emu" set_window --class "dolphin-emu"
 	# make sure said window is active
-	echo "2"
 	xdotool search --class "dolphin-emu" windowactivate
+}
+
+## Launch games with PCSX2
+# This requires that config files are dumped and used
+pcsx2 ()
+{
+	GAME="$2"
+	PCSX2 "/run/media/HDD/ROMs/PS2/$GAME.iso" --cfgpath="/home/kat/.config/PCSX2/configs/$GAME/" \
+		--fullscreen --nogui
 }
 
 case "$1" in
 	(--htop) htop ;;
 	(--conky) conky ;;
 	(--dolphin) dolphin "$@" ;;
+	(--pcsx2) pcsx2 "$@" ;;
 esac

@@ -53,6 +53,9 @@ exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
 
 ## Autostart
 #
+# start ds4drv
+exec_always --no-startup-id ds4drv
+#
 # map tablet to primary screen at start
 exec --no-startup-id $HOME/.config/i3/tablet.sh
 #
@@ -165,10 +168,11 @@ bindsym $mod+Control+9 move container to workspace number $ws9, workspace $ws9
 bindsym $mod+Control+0 move container to workspace number $ws10, workspace $ws10
 #
 # assign specific workspace to second monitor
-workspace "Second Monitor" output $monitor_two
+workspace "Second Monitor: 1" output $monitor_two
+workspace "Second Monitor: 2" output $monitor_two
 # 
 # switch to that workspace
-bindsym $mod+grave workspace "Second Monitor"
+bindsym $mod+grave exec --no-startup-id $HOME/.config/i3/i3-scripts.sh --second
 #
 # move to scratch workspace
 bindsym $mod+Shift+F4 move container to workspace $scr
@@ -273,12 +277,12 @@ bindsym $mod+o exec --no-startup-id kitty "ranger"
 bindsym $mod+f exec --no-startup-id firefox
 #
 # open htop
-bindsym $mod+p exec --no-startup-id ~/.config/i3/htop.sh
+bindsym $mod+p exec --no-startup-id ~/.config/i3/i3-apps.sh --htop
 for_window [instance="^kitty$" title="^htop$"] floating enable
 for_window [instance="^kitty$" title="^htop$"] resize set width 1100 px, resize set height 300 px
 #
 # open conky
-bindsym $mod+i exec --no-startup-id ~/.config/i3/sysinfo.sh
+bindsym $mod+i exec --no-startup-id ~/.config/i3/i3-apps.sh --conky
 for_window [class="^Conky$" instance="^Conky$"] floating enable
 for_window [class="^Conky$" instance="^Conky$"] resize set width 500 px, resize set height 1000 px, focus
 #
@@ -307,6 +311,9 @@ assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $ga
 # Dolphin-emu
 assign [class="^dolphin-emu$" instance="^dolphin-emu$"] $gam
 for_window [class="dolphin-emu"] move to workspace $gam
+#
+# PCSX2
+for_window [class="PCSX2"] border normal 3
 #
 # bsnes
 assign [class="Hiro" instance="hiro"] $gam

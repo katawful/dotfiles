@@ -17,32 +17,16 @@ main ()
 	if [[ $STAT = "reset" ]]; then
 		# time between 0:00-7:00
 		if [[ $TIME -lt 10700 && $TIME -gt 10000 ]]; then
-			if [[ $THEM = "night" ]]; then
-				exit
-			else
 				night
-			fi
 		# time between 7:00-18:29
 		elif [[ $TIME -ge 10700 && $TIME -lt 11830 ]]; then
-			if [[ $THEM = "day" ]]; then
-				exit
-			else
 				day
-			fi
 		# time between 18:30-20:00
 		elif [[ $TIME -gt 11830 && $TIME -lt 12000 ]]; then
-			if [[ $THEM = "dusk" ]]; then
-				exit
-			else
 				dusk
-			fi
 		# time betwen 20:00-24:00
 		elif [[ $TIME -gt 12000 && $TIME -lt 12400 ]]; then
-			if [[ $THEM = "night" ]]; then
-				exit
-			else
 				night
-			fi
 		fi
 	fi
 }

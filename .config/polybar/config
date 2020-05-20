@@ -1,9 +1,9 @@
 [colors]
 background = ${xrdb:background:#222}
 foreground = ${xrdb:foreground:#222}
-red        = ${xrdb:color9:#222}
+red        = ${xrdb:color1:#222}
 green      = ${xrdb:color2:#222}
-yellow     = ${xrdb:color11:#222}
+yellow     = ${xrdb:color3:#222}
 blue       = ${xrdb:color4:#222}
 purple     = ${xrdb:color5:#222}
 teal       = ${xrdb:color6:#222}
@@ -16,17 +16,14 @@ lgray	   = ${xrdb:color7:#222}
 monitor=${env:MONITOR}
 ; Size
 width  = 100%
-height = 26
-
-; Offset
-;offset-x = 50%
-;offset-y = 50%
+height = 22
 
 ; Position
 bottom = true
 
+
 ; Radius
-radius = 6
+radius = 0
 
 ; Align modules fixed to middle
 fixed-center = true
@@ -41,7 +38,7 @@ line-color = ${colors.foreground}
 
 ; Border
 border-size  = 0
-border-color = ${colors.background}
+border-color = ${colors.foreground}
 
 ; Padding
 padding-left  = 0
@@ -51,16 +48,16 @@ padding-right = 0
 module-margin-left  = 0
 module-margin-right = 0
 
+
 ; Font
-font-0 = firacode nerd font:size=9;2
+font-0 = meslolgs nf:size=9;2
 font-1 = Font Awesome 5 Free Solid:size=10;2
-font-2 = siji:pixelsize=15;2
-font-3 = materialicons:size=18;2
+font-2 = materialicons:size=10;2
 
 ; Modlues
 modules-left   = updates-arch-aur i3 window-script
 modules-center = time date
-modules-right  = memory cpu eth pulseaudio system-cpu-temppercore 
+modules-right  = bluetooth-script memory cpu eth pulseaudio system-cpu-temppercore 
 tray-position = right
 tray-padding = 4
 tray-background = ${colors.red}
@@ -71,6 +68,14 @@ cursor-scroll = ns-resize
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
+[module/bluetooth-script]
+type = custom/script
+exec = ~/.config/polybar/scripts/info-dualshock4.sh
+tail = false
+interval = 0
+label-padding = 1
+label-foreground = ${colors.foreground}
+label-background = ${colors.red}
 
 [module/window-script]
 type = custom/script
@@ -86,24 +91,7 @@ type = custom/script
 exec = ~/.config/polybar/scripts/updates-arch-aur.sh
 interval = 1200
 label-background = ${colors.red}
-label-foreground = ${colors.gray}
-label-padding    = 1
-
-[module/system-bluetooth-bluetoothctl]
-type = custom/script
-exec = ~/.config/polybar/scripts/system-bluetooth-bluetoothctl.sh
-tail = true
-click-left = ~/.config/polybar/scripts/system-bluetooth-bluetoothctl.sh --toggle &
-label-background = ${colors.red}
-label-foreground = ${colors.gray}
-label-padding    = 1
-
-[module/battery-dualshock4]
-type = custom/script
-exec = ~/.config/polybar/scripts/info-dualshock4.sh
-interval = 10
-label-background = ${colors.red}
-label-foreground = ${colors.gray}
+label-foreground = ${colors.foreground}
 label-padding    = 1
 
 [module/i3]
@@ -154,17 +142,6 @@ label-background = ${colors.yellow}
 label-foreground = ${colors.foreground}
 label-padding    = 1
 
-[module/weather]
-type = custom/script
-; Script
-exec = /home/kat/.config/polybar/scripts/weather.sh
-; Update interval
-interval = 600
-; Label
-label            = %output%
-label-foreground = ${colors.foreground}
-label-padding    = 1
-
 [module/time]
 type = internal/date
 ; Update interval
@@ -187,12 +164,6 @@ label            = " %date%"
 label-foreground = ${colors.foreground}
 label-padding    = 1
 
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:64:...%
-label-padding = 1
-label-background = ${colors.gray}
-
 [module/filesystem]
 type = internal/fs
 interval = 25
@@ -207,10 +178,10 @@ label-background = ${colors.purple}
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "  "
+format-prefix = " "
 format-prefix-background = ${colors.blue}
 format-prefix-foreground = ${colors.foreground}
-label = CPU: %percentage:2%%
+label = "CPU: %percentage:2%%"
 label-background = ${colors.blue}
 label-foreground = ${colors.foreground}
 label-padding = 1
@@ -231,7 +202,7 @@ interface = enp4s0
 interval = 3.0
 
 format-connected-background = ${colors.teal}
-format-connected-prefix = "  "
+format-connected-prefix = "  "
 format-connected-prefix-foreground = ${colors.foreground}
 label-connected = "Connected  "
 label-connected-foreground = ${colors.foreground}
@@ -240,7 +211,7 @@ label-padding = 1
 ;format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = "Disconnected :(  "
+label-disconnected = " Disconnected "
 label-disconnected-foreground = ${colors.foreground}
 
 [module/battery]
@@ -290,14 +261,20 @@ label-warn-padding    = 1
 type = internal/pulseaudio
 
 ; Volume label
-label-volume            =  %percentage%%
+format-volume = <ramp-volume><label-volume>
+label-volume            = %percentage%%
+ramp-volume-0 = "  "
+ramp-volume-1 = " 奔"
+ramp-volume-2 = " 墳"
+ramp-volume-background = ${colors.green}
+ramp-volume-padding = 0
 label-volume-background = ${colors.green}
 label-volume-foreground = ${colors.foreground}
 label-volume-padding    = 1
 
 ; Muted label
-label-muted            =  Muted
-label-muted-background = ${colors.foreground}
+label-muted            = ﱝ Muted
+label-muted-background = ${colors.red}
 label-muted-foreground = ${colors.foreground}
 label-muted-padding    = 1
 
