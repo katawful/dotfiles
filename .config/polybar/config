@@ -12,7 +12,7 @@ orange     = ${xrdb:color15:#222}
 gray       = ${xrdb:color8:#222}
 lgray	   = ${xrdb:color7:#222}
 
-[bar/mybar]
+[bar/bottombar]
 monitor=${env:MONITOR}
 ; Size
 width  = 100%
@@ -21,9 +21,8 @@ height = 22
 ; Position
 bottom = true
 
-
 ; Radius
-radius = 0
+radius = 6
 
 ; Align modules fixed to middle
 fixed-center = true
@@ -48,25 +47,78 @@ padding-right = 0
 module-margin-left  = 0
 module-margin-right = 0
 
-
 ; Font
 font-0 = meslolgs nf:size=9;2
 font-1 = Font Awesome 5 Free Solid:size=10;2
 font-2 = materialicons:size=10;2
 
 ; Modlues
-modules-left   = updates-arch-aur i3 window-script
-modules-center = time date
-modules-right  = bluetooth-script memory cpu eth pulseaudio system-cpu-temppercore 
-tray-position = right
-tray-padding = 4
-tray-background = ${colors.red}
+modules-left   = i3 
+modules-center = 
+modules-right  = window-script
+
 
 ; Cursor actions
 cursor-click  = pointer
 cursor-scroll = ns-resize
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
+
+
+[bar/topbar]
+monitor=${env:MONITOR}
+; Size
+width  = 100%
+height = 14
+
+; Position
+bottom = false
+
+; Radius
+radius = 4
+
+; Align modules fixed to middle
+fixed-center = true
+
+; Colors
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+; Underline
+line-size  = 1
+line-color = ${colors.foreground}
+
+; Border
+border-size  = 0
+border-color = ${colors.foreground}
+
+; Padding
+padding-left  = 0
+padding-right = 0
+
+; Margin of modules
+module-margin-left  = 0
+module-margin-right = 0
+
+; Font
+font-0 = meslolgs nf:size=8;2
+font-1 = Font Awesome 5 Free Solid:size=9;2
+font-2 = materialicons:size=9;2
+
+; Modlues
+modules-left   = updates-arch-aur memory cpu system-cpu-temppercore 
+modules-center = time date
+modules-right  = eth pulseaudio bluetooth-script  
+tray-position = right
+tray-padding = 4
+tray-maxsize = 12
+tray-scale = 1.0
+tray-background = ${colors.red}
+
+; Cursor actions
+cursor-click  = pointer
+
+
 
 [module/bluetooth-script]
 type = custom/script
@@ -85,6 +137,8 @@ interval = 0
 label-padding = 1
 label-foreground = ${colors.foreground}
 label-background = ${colors.lgray}
+click-left = ~/.config/i3/i3-menus.sh --active
+
 
 [module/updates-arch-aur]
 type = custom/script
@@ -92,7 +146,7 @@ exec = ~/.config/polybar/scripts/updates-arch-aur.sh
 interval = 1200
 label-background = ${colors.red}
 label-foreground = ${colors.foreground}
-label-padding    = 1
+label-padding = 1
 
 [module/i3]
 type = internal/i3
@@ -140,7 +194,10 @@ exec = ~/.config/polybar/scripts/system-cpu-temppercore.sh
 interval = 5
 label-background = ${colors.yellow}
 label-foreground = ${colors.foreground}
-label-padding    = 1
+label-padding = 1
+format-suffix = "▓▒░"
+format-suffix-background = ${colors.background}
+format-suffix-foreground = ${colors.yellow}
 
 [module/time]
 type = internal/date
@@ -178,10 +235,7 @@ label-background = ${colors.purple}
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-background = ${colors.blue}
-format-prefix-foreground = ${colors.foreground}
-label = "CPU: %percentage:2%%"
+label = " CPU: %percentage:2%%"
 label-background = ${colors.blue}
 label-foreground = ${colors.foreground}
 label-padding = 1
@@ -201,16 +255,20 @@ type = internal/network
 interface = enp4s0
 interval = 3.0
 
-format-connected-background = ${colors.teal}
-format-connected-prefix = "  "
-format-connected-prefix-foreground = ${colors.foreground}
-label-connected = "Connected  "
+format-connected-prefix = "░▒▓"
+format-connected-prefix-background = ${colors.background}
+format-connected-prefix-foreground = ${colors.teal}
+label-connected = " Connected  "
 label-connected-foreground = ${colors.foreground}
+label-connected-background = ${colors.teal}
 label-padding = 1
 
 ;format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
+format-disconnected-prefix = "░▒▓"
+format-disconnected-prefix-background = ${colors.background}
+format-disconnected-prefix-foreground = ${colors.teal}
 label-disconnected = " Disconnected "
 label-disconnected-foreground = ${colors.foreground}
 

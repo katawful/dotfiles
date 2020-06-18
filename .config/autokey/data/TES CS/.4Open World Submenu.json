@@ -1,0 +1,28 @@
+{
+    "type": "script",
+    "description": "4:Open World Submenu",
+    "store": {},
+    "modes": [
+        3
+    ],
+    "usageCount": 3,
+    "prompt": false,
+    "omitTrigger": false,
+    "showInTrayMenu": true,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [],
+        "hotKey": "<f4>"
+    },
+    "filter": {
+        "regex": null,
+        "isRecursive": false
+    }
+}

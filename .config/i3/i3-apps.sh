@@ -15,10 +15,10 @@ htop ()
 
 ## Launch conky
 # I use conky to show my system info at a glance
-conky ()
+conkyscript ()
 {
 	#set window title
-	#echo -ne "\033]0;"conky"\007"
+	echo -ne "\033]0;"conky"\007"
 
 	#runs conky with my custom menu in terminal
 	conky -c "/home/kat/.config/conky/conky.conf"
@@ -53,7 +53,7 @@ pcsx2 ()
 
 case "$1" in
 	(--htop) htop ;;
-	(--conky) conky ;;
+	(--conky) conkyscript ;;
 	(--dolphin) dolphin "$@" ;;
 	(--pcsx2) pcsx2 "$@" ;;
 esac

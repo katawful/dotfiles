@@ -35,6 +35,7 @@ notheme ()
 {
 	wal -R
 	echo "reset" > "/home/kat/.cache/wal/stat"
+	main
 }
 
 day ()
@@ -68,4 +69,5 @@ night ()
 }
 
 # run the main script
+#sleep 11
 main

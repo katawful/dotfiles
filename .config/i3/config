@@ -17,7 +17,7 @@ set $mod Mod4
 font xft:meslolgs nf 9
 #
 # add window border for active window
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 3 
 #
 # change window color - gruvbox colors
 set_from_resource        $fg      i3wm.color0   #f0f0f0             
@@ -56,6 +56,9 @@ exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
 # start ds4drv
 exec_always --no-startup-id ds4drv
 #
+# run theme at session start
+exec --no-startup-id $HOME/.config/i3/i3-theme.sh
+#
 # map tablet to primary screen at start
 exec --no-startup-id $HOME/.config/i3/tablet.sh
 #
@@ -86,7 +89,8 @@ exec --no-startup-id discord
 # 
 # assign gaps
 gaps inner 5
-gaps outer 5
+gaps outer -5
+gaps horizontal 3
 
 
 ## Workspaces
@@ -291,19 +295,22 @@ bindsym $mod+F9 exec --no-startup-id pavucontrol
 for_window [class="Pavucontrol" instance="pavucontrol" title="Volume Control"] floating enable
 #
 # TES Construction Set rules for more reasonable usage - namely tabbed instance so less floating fighting
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Object Window$"] floating disable, title_format "<b>%title</b>"
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Cell View$"] floating disable, title_format "<b>%title</b>"
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Render Window$"] floating disable, title_format "<b>%title</b>"
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^TES Construction Set$"] floating disable, title_format "<b>%title</b>"
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Object Window$"] floating disable
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Cell View$"] floating disable
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Render Window$"] floating disable
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^TES Construction Set$"] floating disable
 	# the above are the main windows in question and shouldn't be floating, 
 	# tertiary windows like preferences or the landscape tools should be floating and rest on top
 for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] layout tabbed
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] title_format "|<b>%title</b>|"
+for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] title_format
 	# run the CS in tabs with a modified title
 
 
 ## Game Rules
 # these open up the apps in the desired workspace
+#
+# Final Fantasy X
+for_window [class="steam_app_359870" instance="ffx&x-2_launcher.exe" title="FINAL FANTASY X/X-2 LAUNCHER"] floating enable
 #
 # Oblivion
 assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $gam

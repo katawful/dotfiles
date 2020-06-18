@@ -22,7 +22,7 @@ i3activewindow ()
 		rownum=$(($rownum+1))
 	done
 	rows=$(($rownum / 2))			# get number of rows split in 2 to make rofi look pretty
-	choice=$(echo -e "$listwin" | dmenu -i -l $rows)	# offload list to a choice
+	choice=$(echo -e "$listwin" | rofi -dmenu -p "Active Windows" -i -l $rows)	# offload list to a choice
 	winid=$(xdotool search --name "$choice") # get the window id so we can activate it
 	if [ -z "$choice" ]; then		# if we didn't choose anything, this stops the script from exiting in an error
 		exit 1
@@ -122,7 +122,7 @@ i3searchmark ()
 		grep -B1 -A1 "[[]" | tr -d "\\n["  | sed 's/--/\n/g')"
 	rows=$(echo "$menu" | wc -l)
 	echo "$rows"
-	pair=$(echo "${menu}" | dmenu -i -l $rows) 
+	pair=$(echo "${menu}" | rofi -dmenu -p "Search Marks" -i -l $rows) 
 
 	for s in ${pair}; do mark=${s/,/}; done
 	if [ "_${mark}" != "_" ]; then
@@ -154,7 +154,7 @@ opencplusplus ()
 # This shows a menu of the things we can launch
 openthings ()
 {
-	choice=$(echo -e "Launch CSE\nLaunch C++ Studying" | dmenu -i -l 2)
+	choice=$(echo -e "Launch CSE\nLaunch C++ Studying" | rofi -dmenu -p "Open Setup" -i -l 2)
 	if [[ $choice == "Launch CSE" ]]; then
 		openmodding
 	elif [[ $choice == "Launch C++ Studying" ]]; then

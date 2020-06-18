@@ -1,0 +1,28 @@
+{
+    "type": "script",
+    "description": "6:Open Gameplay Submenu",
+    "store": {},
+    "modes": [
+        3
+    ],
+    "usageCount": 6,
+    "prompt": false,
+    "omitTrigger": false,
+    "showInTrayMenu": true,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [],
+        "hotKey": "<f6>"
+    },
+    "filter": {
+        "regex": null,
+        "isRecursive": false
+    }
+}

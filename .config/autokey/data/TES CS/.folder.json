@@ -1,0 +1,23 @@
+{
+    "type": "folder",
+    "title": "TES CS",
+    "modes": [],
+    "usageCount": 0,
+    "showInTrayMenu": true,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [],
+        "hotKey": null
+    },
+    "filter": {
+        "regex": "tesconstructionset.exe.tesconstructionset.exe",
+        "isRecursive": true
+    }
+}

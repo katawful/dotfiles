@@ -1,0 +1,28 @@
+{
+    "type": "script",
+    "description": "5:Open Character Submenu",
+    "store": {},
+    "modes": [
+        3
+    ],
+    "usageCount": 7,
+    "prompt": false,
+    "omitTrigger": false,
+    "showInTrayMenu": true,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [],
+        "hotKey": "<f5>"
+    },
+    "filter": {
+        "regex": null,
+        "isRecursive": false
+    }
+}
