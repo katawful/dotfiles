@@ -38,16 +38,16 @@ i3capture ()
 			activewinscrot
 			;;
 		screen-1)
-			scrot -a 1921,0,1920,1080 ~/Pictures/SCREEN/$FILE.png
+			scrot -a 1921,0,1920,1080 ~/Pictures/SCREEN/"$FILE".png
 			;;
 		screen-2)
-			scrot -a 0,0,1920,1080 ~/Pictures/SCREEN/$FILE.png
+			scrot -a 0,0,1920,1080 ~/Pictures/SCREEN/"$FILE".png
 			;;
 		rectangle)
-			scrot -z -s -f ~/Pictures/RECTANGLE/$FILE.png
+			scrot -z -s -f ~/Pictures/RECTANGLE/"$FILE".png
 			;;
 		all)
-			scrot -z -m ~/Pictures/SCREEN/$FILE.png
+			scrot -z -m ~/Pictures/SCREEN/"$FILE".png
 			;;
 		*)
 			echo "Usage: $0 $1 {active-window|screen-1|screen-2|rectangle|all}"
@@ -71,11 +71,11 @@ activewinscrot ()
 
 	if ls "/home/kat/Pictures/$NAME" ; then 
 		cd "/home/kat/Pictures/$NAME"
-		scrot -u $FILE.png
+		scrot -u "$FILE".png
 	else
 		mkdir "/home/kat/Pictures/$NAME"
 		cd "/home/kat/Pictures/$NAME"
-		scrot -u $FILE.png
+		scrot -u "$FILE".png
 	fi
 
 	cd $HOME

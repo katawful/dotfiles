@@ -1,6 +1,7 @@
 [colors]
 background = ${xrdb:background:#222}
-foreground = ${xrdb:foreground:#222}
+;foreground = ${xrdb:foreground:#222}
+foreground = ${xrdb:color15:#222}
 red        = ${xrdb:color1:#222}
 green      = ${xrdb:color2:#222}
 yellow     = ${xrdb:color3:#222}
@@ -22,7 +23,7 @@ height = 22
 bottom = true
 
 ; Radius
-radius = 6
+radius = 0
 
 ; Align modules fixed to middle
 fixed-center = true
@@ -55,8 +56,7 @@ font-2 = materialicons:size=10;2
 ; Modlues
 modules-left   = i3 
 modules-center = 
-modules-right  = window-script
-
+modules-right  = window-script xwindow
 
 ; Cursor actions
 cursor-click  = pointer
@@ -75,7 +75,7 @@ height = 14
 bottom = false
 
 ; Radius
-radius = 4
+radius = 0
 
 ; Align modules fixed to middle
 fixed-center = true
@@ -118,7 +118,12 @@ tray-background = ${colors.red}
 ; Cursor actions
 cursor-click  = pointer
 
-
+[module/xwindow]
+type = internal/xwindow
+format = <label>
+label-background = ${colors.gray}
+label-foreground = ${colors.foreground}
+label-padding = 1
 
 [module/bluetooth-script]
 type = custom/script
@@ -136,7 +141,7 @@ tail = true
 interval = 0
 label-padding = 1
 label-foreground = ${colors.foreground}
-label-background = ${colors.lgray}
+label-background = ${colors.gray}
 click-left = ~/.config/i3/i3-menus.sh --active
 
 

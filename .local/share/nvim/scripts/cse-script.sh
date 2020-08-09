@@ -78,6 +78,8 @@ get_script()
 		continue
 	else
 		clear
+		echo "$work_scriptfile"
+		echo "${work_scriptfile: -4}"
 		echo "Invalid file, exiting script"
 			xdotool windowactivate "$previous_window"
 		exit 1

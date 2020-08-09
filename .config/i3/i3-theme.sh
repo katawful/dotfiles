@@ -20,7 +20,7 @@ main ()
 				night
 		# time between 7:00-18:29
 		elif [[ $TIME -ge 10700 && $TIME -lt 11830 ]]; then
-				day
+				dusk
 		# time between 18:30-20:00
 		elif [[ $TIME -gt 11830 && $TIME -lt 12000 ]]; then
 				dusk
@@ -40,7 +40,8 @@ notheme ()
 
 day ()
 {
-	wal --theme "/home/kat/.config/wal/colorschemes/light/base16-gruvbox-soft.json"
+	#wal --theme "/home/kat/.config/wal/colorschemes/light/base16-gruvbox-soft.json"
+	wal --theme sexy-s3r0-modified
 	redshift -PO 5700
 	echo "day" > "/home/kat/.cache/wal/theme"
 	# change conky theme
@@ -50,7 +51,8 @@ day ()
 
 dusk ()
 {
-	wal --theme "/home/kat/.config/wal/colorschemes/dark/base16-gruvbox-soft.json"
+#	wal --theme "/home/kat/.config/wal/colorschemes/dark/base16-gruvbox-soft.json"
+	wal --theme sexy-s3r0-modified
 	redshift -PO 5700
 	echo "dusk" > "/home/kat/.cache/wal/theme"
 	# change conky theme
@@ -60,7 +62,8 @@ dusk ()
 
 night ()
 {
-	wal --theme "/home/kat/.config/wal/colorschemes/dark/base16-gruvbox-soft.json"
+#	wal --theme "/home/kat/.config/wal/colorschemes/dark/base16-gruvbox-soft.json"
+	wal --theme sexy-s3r0-modified
 	redshift -PO 3500
 	echo "night" > "/home/kat/.cache/wal/theme"
 	# change conky theme

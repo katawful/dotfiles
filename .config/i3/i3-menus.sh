@@ -12,7 +12,7 @@ i3activewindow ()
 {
 	rownum=1				# start row at 1
 	totrow=$(wmctrl -l | grep "" -c)	# show total rows
-	while [ $rownum -le $totrow ]		# while current row is <= total row
+	while [ "$rownum" -le "$totrow" ]		# while current row is <= total row
 	do
 		# print the window name for the current row of wmctrl
 		win=$(wmctrl -l | awk -v a="$rownum" 'FNR == a {print}' | cut -c 24-)
@@ -57,7 +57,7 @@ i3windowid ()
 				grep -B1 -A1 "[[]" | tr -d "\\n["  | sed 's/--/\n/g' | \
 				awk -v a="$rownum" 'FNR == a {print}' | cut -d '"' -f2)"
 			# if we found the correct mark
-			if [[ $markwin == $win ]]; then
+			if [[ "$markwin" == "$win" ]]; then
 				break	# leave loop if we got the mark
 			else
 				rownum=$(($rownum+1))
@@ -66,7 +66,7 @@ i3windowid ()
 
 		# see if we even need to use the mark
 		# if we reached the end of the rows and our mark window doesn't match our active one
-		if [[ $rownum == $totrow ]] && [[ $markwin != $win ]]; then
+		if [[ "$rownum" == "$totrow" ]] && [[ "$markwin" != "$win" ]]; then
 			mark=""
 		else
 			mark="$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
@@ -77,15 +77,15 @@ i3windowid ()
 		
 		# shorten window name if too long
 		if [ ${#win} -gt 60 ]; then
-			win="$(echo $win | cut -c 1-60)..."
+			win="$(echo "$win" | cut -c 1-60)..."
 		fi
 
 		# prepend mark if it exists
 		if [ -z "$mark" ]; then
-			echo "$win"
+			echo ""
 			exit 1
 		else
-			echo " $mark $win"
+			echo " $mark"
 			exit 1
 		fi
 	fi
@@ -122,7 +122,7 @@ i3searchmark ()
 		grep -B1 -A1 "[[]" | tr -d "\\n["  | sed 's/--/\n/g')"
 	rows=$(echo "$menu" | wc -l)
 	echo "$rows"
-	pair=$(echo "${menu}" | rofi -dmenu -p "Search Marks" -i -l $rows) 
+	pair=$(echo "${menu}" | rofi -dmenu -p "Search Marks" -i -l "$rows") 
 
 	for s in ${pair}; do mark=${s/,/}; done
 	if [ "_${mark}" != "_" ]; then
@@ -135,8 +135,8 @@ i3searchmark ()
 # This opens up my modding setup
 openmodding ()
 {
-	cd ~/Programming/oblivion-git && kitty "nvim" &
-	cd ~/.obl/drive_c/Oblivion
+	cd ~/Documents/Programming/oblivion-git && kitty "nvim" &
+	cd ~/.obl/drive_c/Oblivion || exit
 	WINEPREFIX=~/.obl winetricks isolate_home && \
 		WINEPREFIX=~/.obl wine \
 		~/.obl/drive_c/Oblivion/obse_loader.exe -editor -notimeout
@@ -147,7 +147,7 @@ openmodding ()
 # This opens up my C++ studying setup
 opencplusplus ()
 {
-	cd ~/Programming/My-Tests/C++/C++\ Primer\ Exerices && kitty "nvim" &
+	cd ~/Documents/Programming/Study\ Problems/C++/C++\ Primer\ Exerices && kitty "nvim" &
 }
 
 ## Show launchable modes

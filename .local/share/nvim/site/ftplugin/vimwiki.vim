@@ -1,0 +1,2 @@
+"" Vimwiki vimrc file
+

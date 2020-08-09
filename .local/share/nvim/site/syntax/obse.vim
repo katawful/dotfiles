@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: OBSE Script (OBSEScript)
-" Maintainer: Ulthar Seramis
-" Latest Revision: 2 September 2014
+" Maintainer: Ulthar Seramis, Kat
+" Latest Revision: 22 June 2020
 
 if exists("b:current_syntax")
 	finish
@@ -9,21 +9,36 @@ endif
 
 let b:current_syntax = 'obse'
 syntax case ignore
+setlocal foldmethod=indent
+setlocal iskeyword+=:,=
+setlocal iskeyword+==,=
+setlocal iskeyword+=>,=
+setlocal iskeyword+=<,=
+setlocal iskeyword+=>
+setlocal iskeyword+=<
+setlocal iskeyword+=!,=
+setlocal iskeyword+=_
 
-syn match obseInt '\d\+' display
-syn match obseInt '[-+]\d\+' display
-syn match obseFloat '\d\+\.\d*' display
-syn match obseFloat '[-+]\d\+\.\d*' display
+syn match obseInt '\<\d\+' display
+syn match obseInt '\<[-+]\d\+' display
+syn match obseFloat '\<\d\+\.\d*' display
+syn match obseFloat '\<[-+]\d\+\.\d*' display
+" TODO this is limited, make custom ctag
+syn match obseNames '\w\+' contained
+syn match obseVariable '\S\a\+' contained
+syn match obseScriptNameRegion '\i\+' contained
 
-syn region obseComment start=";" end="$" keepend contains=obseToDo
+syn region obseComment start=";" end="$" keepend fold contains=obseToDo
 syn region obseString start=/"/ end=/"/
 
 syn keyword obseToDo contained TODO todo Todo ToDo FIXME fixme NOTE note
-syn keyword obseTypes short long float ref reference array_var string_var int
+syn keyword obseTypes short long float ref reference array_var string_var int nextgroup=obseNames skipwhite
 syn keyword obseCondition If Else ElseIf EndIf Return Eval
-syn keyword obseOperator set to let /:=/ /==/ />/ /</ />=/ /<=/
+syn keyword obseStatement set let nextgroup=obseVariable skipwhite
+syn keyword obseStatementTwo to :=
+syn keyword obseOperator == > < >= <= != ) ( } {
 syn keyword obseOtherKey Player player playerRef playerREF PlayerRef PlayerREF
-syn keyword obseScriptName ScriptName scriptname Scriptname scn
+syn keyword obseScriptName ScriptName scriptname Scriptname scn nextgroup=obseScriptNameRegion skipwhite
 syn keyword obseBlock Begin End
 syn keyword obseRepeat Label GoTo While Loop ForEach Break Continue
 
@@ -2142,6 +2157,9 @@ syn keyword skillAttribute
 if !exists("did_obse_inits")
 
 	let did_obse_inits = 1
+	hi def link obseStatement Statement
+	hi def link obseStatementTwo Statement
+	hi def link obseDescBlock String
 	hi def link obseComment Comment
 	hi def link obseString String
 	hi def link obseInt Number
@@ -2150,10 +2168,14 @@ if !exists("did_obse_inits")
 	hi def link obseTypes Type
 	hi def link obseCondition Conditional
 	hi def link obseOperator Operator
-	hi def link obseOtherKey Keyword
+	hi def link obseOtherKey Special
 	hi def link obseScriptName Special
 	hi def link obseBlock Conditional
 	hi def link obseBlockType Special
+	hi def link obseScriptNameRegion Underlined
+	hi def link obseNames Identifier
+	hi def link obseVariable Identifier
+	hi def link obseReference Identifier
 
 	hi def link csFunction Function
 	hi def link obseFunction Function

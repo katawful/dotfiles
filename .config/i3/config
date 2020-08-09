@@ -88,9 +88,9 @@ assign [class="^discord$" instance="^discord$"] $dis
 exec --no-startup-id discord
 # 
 # assign gaps
-gaps inner 5
-gaps outer -5
-gaps horizontal 3
+#gaps inner 5
+#gaps outer -5
+#gaps horizontal 3
 
 
 ## Workspaces
@@ -180,6 +180,10 @@ bindsym $mod+grave exec --no-startup-id $HOME/.config/i3/i3-scripts.sh --second
 #
 # move to scratch workspace
 bindsym $mod+Shift+F4 move container to workspace $scr
+#
+# move to games workspace
+bindsym $mod+Shift+F2 move container to workspace $gam
+
 
 
 ## Hotkeys
@@ -274,6 +278,9 @@ bindsym $mod+c focus child
 
 ## App Rules
 #
+# Open Neovim
+bindsym $mod+bracketleft exec --no-startup-id kitty "nvim"
+#
 # open ranger
 bindsym $mod+o exec --no-startup-id kitty "ranger"
 #
@@ -308,6 +315,9 @@ for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"
 
 ## Game Rules
 # these open up the apps in the desired workspace
+#
+# Hollow Knight
+assign [class="hollow_knight.x86_64" instance="hollow_knight.x86_64" title="Hollow Knight"] $gam
 #
 # Final Fantasy X
 for_window [class="steam_app_359870" instance="ffx&x-2_launcher.exe" title="FINAL FANTASY X/X-2 LAUNCHER"] floating enable
@@ -346,7 +356,7 @@ for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"
 for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] floating disable
 #
 # Minecraft - class is version dependent so I'll have to fix that somehow
-assign [class="Minecraft 1.15.2" instance="Minecraft 1.15.2"] $gam
+assign [class="^Minecraft" instance="^Minecraft"] $gam
 for_window [class="minecraft-launcher" instance="Minecraft Launcher" title="Minecraft Launcher"] move to workspace $gam
 
 

@@ -29,7 +29,7 @@ alias day-light='redshift -P -O 5700'
 alias i3config='vim ~/.config/i3/config'
 
 # local jekyll site
-alias run-site='cd ~/Programming/katawful.github.io/ && rake build'
+alias run-site='cd ~/Documents/Programming/katawful.github.io/ && rake build -X'
 
 # git stuff
 alias grmdc='git rm --cached -r'
