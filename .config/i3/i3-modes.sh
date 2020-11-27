@@ -61,6 +61,8 @@ activewinscrot ()
 {
 	# get window name
 	NAME=$(xdotool getwindowfocus getwindowname)
+	# get window class from the active window name
+	CLASS=$(xprop -name "$NAME" | grep WM_CLASS | awk '{print $3}' | sed 's/^"\(.*\)".*/\1/')
 	# get current time and date
 	YEAR=$(date +"%Y")
 	MONT=$(date +"%m")
@@ -69,13 +71,25 @@ activewinscrot ()
 	# combine them how i want to
 	FILE=$YEAR-$MONT-$DAY~$TIME
 
-	if ls "/home/kat/Pictures/$NAME" ; then 
-		cd "/home/kat/Pictures/$NAME"
-		scrot -u "$FILE".png
+	# if the class doesn't exist just use the name instead
+	if [ -z "$CLASS" ]; then
+		if ls "/home/kat/Pictures/$NAME" ; then 
+			cd "/home/kat/Pictures/$NAME"
+			scrot -u "$FILE".png
+		else
+			mkdir "/home/kat/Pictures/$NAME"
+			cd "/home/kat/Pictures/$NAME"
+			scrot -u "$FILE".png
+		fi
 	else
-		mkdir "/home/kat/Pictures/$NAME"
-		cd "/home/kat/Pictures/$NAME"
-		scrot -u "$FILE".png
+		if ls "/home/kat/Pictures/$CLASS" ; then 
+			cd "/home/kat/Pictures/$CLASS"
+			scrot -u "$FILE".png
+		else
+			mkdir "/home/kat/Pictures/$CLASS"
+			cd "/home/kat/Pictures/$CLASS"
+			scrot -u "$FILE".png
+		fi
 	fi
 
 	cd $HOME

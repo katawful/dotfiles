@@ -136,3 +136,8 @@ export KEYTIMEOUT=1
 # some exports I need
 export TERM='kitty'
 export TERMINAL='kitty'
+export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
+export LESS='-R '
+source /usr/share/nvm/init-nvm.sh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

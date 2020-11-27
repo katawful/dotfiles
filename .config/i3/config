@@ -53,6 +53,9 @@ exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
 
 ## Autostart
 #
+# redshift
+exec --no-startup-id redshift-gtk
+#
 # start ds4drv
 exec_always --no-startup-id ds4drv
 #
@@ -69,7 +72,7 @@ exec --no-startup-id nitrogen --restore &
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #
 # change color at startup with wal
-exec --no-startup-id systemctl --user start light.service
+# exec --no-startup-id systemctl --user start light.service
 #
 # start autokey at start
 exec --no-startup-id autokey
@@ -82,7 +85,7 @@ exec_always --no-startup-id autotiling
 #
 # open discord in its own workspace at start
 set $dis "Discord"
-workspace $set output $monitor_one
+workspace $dis output $monitor_one
 bindsym $mod+F1 workspace $dis
 assign [class="^discord$" instance="^discord$"] $dis
 exec --no-startup-id discord
@@ -105,6 +108,7 @@ set $ste "Steam"
 workspace $ste output $monitor_one
 bindsym $mod+F3 workspace $ste
 assign [class="^Steam$" instance="^Steam$"] $ste
+for_window [class="steam" instance="steam" title="Steam Controller Configurator"] fullscreen enable
 #
 # scratch workspace for stuff i need to keep open
 set $scr "Scratch"
@@ -285,7 +289,7 @@ bindsym $mod+bracketleft exec --no-startup-id kitty "nvim"
 bindsym $mod+o exec --no-startup-id kitty "ranger"
 #
 # open firefox
-bindsym $mod+f exec --no-startup-id firefox
+bindsym $mod+f exec --no-startup-id MOZ_X11_EGL=1 firefox
 #
 # open htop
 bindsym $mod+p exec --no-startup-id ~/.config/i3/i3-apps.sh --htop
@@ -316,11 +320,21 @@ for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"
 ## Game Rules
 # these open up the apps in the desired workspace
 #
+# Battlefront 2
+assign [class="Wine" instance="battlefrontii.exe" title="Star Wars Battlefront II"] $gam
+#
+# Civ 5
+assign [class="Civ5XP" instance="Civ5XP" title="Sid Meier's Civilization V"] $gam
+#
 # Hollow Knight
 assign [class="hollow_knight.x86_64" instance="hollow_knight.x86_64" title="Hollow Knight"] $gam
 #
 # Final Fantasy X
+for_window [class="ffx&x-2_launcher.exe"] floating enable
 for_window [class="steam_app_359870" instance="ffx&x-2_launcher.exe" title="FINAL FANTASY X/X-2 LAUNCHER"] floating enable
+#
+# Fallout NV
+assign [class="steam_app_22380" instance="falloutnv.exe" title="Fallout: New Vegas"] $gam
 #
 # Oblivion
 assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $gam

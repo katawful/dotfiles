@@ -9,6 +9,7 @@ endif
 
 let b:current_syntax = 'obse'
 syntax case ignore
+setlocal commentstring=;%s
 setlocal foldmethod=indent
 setlocal iskeyword+=:,=
 setlocal iskeyword+==,=
@@ -19,14 +20,15 @@ setlocal iskeyword+=<
 setlocal iskeyword+=!,=
 setlocal iskeyword+=_
 
-syn match obseInt '\<\d\+' display
-syn match obseInt '\<[-+]\d\+' display
-syn match obseFloat '\<\d\+\.\d*' display
-syn match obseFloat '\<[-+]\d\+\.\d*' display
+syn match obseInt '\d\+'
+syn match obseInt '[-+]\d\+'
+syn match obseFloat '\d\+\.\d*' 
+syn match obseFloat '[-+]\d\+\.\d*'
 " TODO this is limited, make custom ctag
 syn match obseNames '\w\+' contained
 syn match obseVariable '\S\a\+' contained
 syn match obseScriptNameRegion '\i\+' contained
+syn match obseReference '\zs\w\+\>\ze\.'
 
 syn region obseComment start=";" end="$" keepend fold contains=obseToDo
 syn region obseString start=/"/ end=/"/
@@ -53,7 +55,7 @@ syn keyword obseBlockType
 	\	QQQ
 	\	OnNewGame
 	\	OnActivate
-	\ 	OnActorEquip
+	\	OnActorEquip
 	\	OnActorUnequip
 	\	OnAdd
 	\	OnAlarm
@@ -573,11 +575,15 @@ syn keyword obseFunction
 	\	Fmod
 	\	GetActiveEffectCount
 	\	GetActiveMenuFilter
+	\	GetActiveMenuComponentID
 	\   GetMessageBoxType
 	\	GetActiveMenuMode
 	\	GetActiveMenuObject
 	\	GetActiveMenuRef
 	\	GetActiveMenuSelection
+	\	GetActiveUIComponentID
+	\	GetActiveUIComponentFullName
+	\	GetActiveUIComponentNAme
 	\	GetActorLightAmount
 	\	GetActorMaxLevel
 	\	GetActorMinLevel
@@ -852,6 +858,7 @@ syn keyword obseFunction
 	\	GetPlayersLastActivatedLoadDoor
 	\	GetPlayersLastRiddenHorse
 	\	GetPlayerSpell
+	\	GetPlayerBirthsign
 	\	GetPlyerSpellCount
 	\	GetPluginVersion
 	\	GetProcessLevel
@@ -882,6 +889,7 @@ syn keyword obseFunction
 	\	GetSpellSchool
 	\   GetSpells
 	\	GetSpellType
+	\	GetTexturePath
 	\	GetTeleportCell	
 	\	GetTotalActiveEffectMagnitude
 	\	GetTotalAEAbilityMagnitude
@@ -2162,8 +2170,8 @@ if !exists("did_obse_inits")
 	hi def link obseDescBlock String
 	hi def link obseComment Comment
 	hi def link obseString String
-	hi def link obseInt Number
 	hi def link obseFloat Float
+	hi def link obseInt Number
 	hi def link obseToDo Todo
 	hi def link obseTypes Type
 	hi def link obseCondition Conditional
@@ -2175,7 +2183,7 @@ if !exists("did_obse_inits")
 	hi def link obseScriptNameRegion Underlined
 	hi def link obseNames Identifier
 	hi def link obseVariable Identifier
-	hi def link obseReference Identifier
+	hi def link obseReference Special
 
 	hi def link csFunction Function
 	hi def link obseFunction Function

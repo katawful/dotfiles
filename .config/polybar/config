@@ -106,7 +106,7 @@ font-1 = Font Awesome 5 Free Solid:size=9;2
 font-2 = materialicons:size=9;2
 
 ; Modlues
-modules-left   = updates-arch-aur memory cpu system-cpu-temppercore 
+modules-left   = updates-arch-aur memory cpu system-cpu-temppercore
 modules-center = time date
 modules-right  = eth pulseaudio bluetooth-script  
 tray-position = right
@@ -133,6 +133,16 @@ interval = 0
 label-padding = 1
 label-foreground = ${colors.foreground}
 label-background = ${colors.red}
+
+[module/test-script]
+type = custom/script
+exec = ~/.config/polybar/scripts/test2.sh
+tail = true
+interval = 0
+label-padding = 1
+label-foreground = ${colors.foreground}
+label-background = ${colors.red}
+
 
 [module/window-script]
 type = custom/script

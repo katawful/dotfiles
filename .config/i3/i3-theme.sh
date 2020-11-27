@@ -40,8 +40,8 @@ notheme ()
 
 day ()
 {
-	#wal --theme "/home/kat/.config/wal/colorschemes/light/base16-gruvbox-soft.json"
-	wal --theme sexy-s3r0-modified
+	wal --theme "/home/kat/.config/wal/colorschemes/dark/my-theme.json"
+#	wal --theme base16-atelier-lakeside
 	redshift -PO 5700
 	echo "day" > "/home/kat/.cache/wal/theme"
 	# change conky theme
@@ -52,7 +52,7 @@ day ()
 dusk ()
 {
 #	wal --theme "/home/kat/.config/wal/colorschemes/dark/base16-gruvbox-soft.json"
-	wal --theme sexy-s3r0-modified
+	wal --theme "/home/kat/.config/wal/colorschemes/dark/my-theme.json"
 	redshift -PO 5700
 	echo "dusk" > "/home/kat/.cache/wal/theme"
 	# change conky theme
@@ -63,7 +63,7 @@ dusk ()
 night ()
 {
 #	wal --theme "/home/kat/.config/wal/colorschemes/dark/base16-gruvbox-soft.json"
-	wal --theme sexy-s3r0-modified
+	wal --theme "/home/kat/.config/wal/colorschemes/dark/my-theme.json"
 	redshift -PO 3500
 	echo "night" > "/home/kat/.cache/wal/theme"
 	# change conky theme

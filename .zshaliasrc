@@ -41,3 +41,15 @@ alias light-mode='sh ~/.config/i3/i3-theme.sh'
 
 # search fonts
 alias fonts='fc-list | grep'
+
+# increase min ram
+alias ram-increase='sh ~/Programs_and_Stuff/Git_Repos/dxvk-mem-free/mem-free.sh'
+
+# check dependencies
+alias depend="pacman -Qi | sed '/^Depends On/,/^Required By/{ s/^Required By.*$//; H; d }; /^Name/!d; /^Name/{ n;x;}'| sed '/^$/s//==================================================================================/' | less"
+
+# xprop
+alias winprop="sh ~/.config/i3/i3-window.sh"
+
+# New Vegas modding
+alias nvmod="STEAM_COMPAT_DATA_PATH=~/.local/share/Steam/steamapps/compatdata/22380 ~/.local/share/Steam/steamapps/common/Proton\ 5.0/proton run"

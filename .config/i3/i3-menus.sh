@@ -72,22 +72,29 @@ i3windowid ()
 			mark="$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
 				grep -B1 -A1 "[[]" | tr -d "\\n["  | sed 's/--/\n/g' | \
 				awk -v a="$rownum" 'FNR == a {print}' | cut -d '"' -f4)"
+			if [ -z "$mark" ]; then
+				echo ""
+				exit 1
+			else
+				echo " $mark"
+				exit 1
+			fi
 		fi
 
 		
 		# shorten window name if too long
-		if [ ${#win} -gt 60 ]; then
-			win="$(echo "$win" | cut -c 1-60)..."
-		fi
+		# if [ ${#win} -gt 60 ]; then
+		# 	win="$(echo "$win" | cut -c 1-60)..."
+		# fi
 
 		# prepend mark if it exists
-		if [ -z "$mark" ]; then
-			echo ""
-			exit 1
-		else
-			echo " $mark"
-			exit 1
-		fi
+		# if [ -z "$mark" ]; then
+		# 	echo ""
+		# 	exit 1
+		# else
+		# 	echo " $mark"
+		# 	exit 1
+		# fi
 	fi
 }
 

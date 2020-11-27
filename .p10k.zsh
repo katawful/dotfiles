@@ -218,7 +218,7 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=7
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=15
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=0
   # Make the icon bold.
   typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='%B${P9K_CONTENT// }'
@@ -535,7 +535,7 @@
 
   ###################[ command_execution_time: duration of the last command ]###################
   # Execution time color.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=7
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=15
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=6
   # Show duration of the last command if takes longer than this many seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
@@ -727,7 +727,7 @@
   #################[ ranger: ranger shell (https://github.com/ranger/ranger) ]##################
   # Ranger shell color.
   typeset -g POWERLEVEL9K_RANGER_FOREGROUND=8
-  typeset -g POWERLEVEL9K_RANGER_BACKGROUND=7
+  typeset -g POWERLEVEL9K_RANGER_BACKGROUND=15
   # Custom icon.
   # typeset -g POWERLEVEL9K_RANGER_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -740,7 +740,7 @@
 
   ###########################[ vim_shell: vim shell indicator (:sh) ]###########################
   # Vim shell indicator color.
-  typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=7
+  typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=15
   typeset -g POWERLEVEL9K_VIM_SHELL_BACKGROUND=3
   # Custom icon.
   # typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -892,7 +892,7 @@
   typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=3
   typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=0
   # Default context color (no privileges, no SSH).
-  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=7
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=15
   typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=4
 
   # Context format when running with privileges: user@hostname.
