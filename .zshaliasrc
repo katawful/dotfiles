@@ -53,3 +53,7 @@ alias winprop="sh ~/.config/i3/i3-window.sh"
 
 # New Vegas modding
 alias nvmod="STEAM_COMPAT_DATA_PATH=~/.local/share/Steam/steamapps/compatdata/22380 ~/.local/share/Steam/steamapps/common/Proton\ 5.0/proton run"
+
+# udisks aliases
+alias udmount='udisksctl mount -b'
+alias udumount='udisksctl unmount -b'

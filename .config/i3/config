@@ -57,7 +57,7 @@ exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
 exec --no-startup-id redshift-gtk
 #
 # start ds4drv
-exec_always --no-startup-id ds4drv
+# exec_always --no-startup-id ds4drv
 #
 # run theme at session start
 exec --no-startup-id $HOME/.config/i3/i3-theme.sh
@@ -81,7 +81,7 @@ exec --no-startup-id autokey
 exec --no-startup-id scc daemon start
 #
 # use autotiling script from: https://github.com/nwg-piotr/autotiling
-exec_always --no-startup-id autotiling
+exec_always --no-startup-id autotiling &
 #
 # open discord in its own workspace at start
 set $dis "Discord"
