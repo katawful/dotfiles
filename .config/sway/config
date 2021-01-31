@@ -1,0 +1,399 @@
+### Contents
+## Variables
+## Displays
+## Idle
+## Input
+## Hotkeys
+## Workspaces
+## Modes
+## Autostart
+## Rules
+
+### Variables
+	set $mod Mod4
+	set $left h
+	set $down j
+	set $up k
+	set $right l
+	set $term kitty
+	# set $menu j4-dmenu-desktop --dmenu='bemenu -i --nb "#3f3f3f" --nf \
+		# "#dcdccc" --fn "pango:DejaVu Sans Mono 12"' --term='kitty'
+	set $menu wofi -I --show drun --sort-order=alphabeticaly --location=5 \
+		--lines=10 --columns=2 --xoffset=-5 --yoffset=-35
+	set $dis "Discord"
+	set $gam "Game"
+	set $ste "Steam"
+	set $ws1 "1"
+	set $ws2 "2"
+	set $ws3 "3"
+	set $ws4 "4"
+	set $ws5 "5"
+	set $ws6 "6"
+	set $ws7 "7"
+	set $ws8 "8"
+	set $ws9 "9"
+	set $ws10 "10"
+	set $monitor_one "DP-2"
+	set $monitor_two "HDMI-A-1"
+	set $fg #0f1826
+	set $bg #bfd8ff
+	set $red #f2452e
+	set $green #5cf289
+	set $orange #f2b15c
+	set $purple #dd7ff0
+	set $cyan #7bb7c9
+	set $pink #F29CB1
+	set $fg-alt #1C2E4A
+	set $bg-alt #DAF6FF
+	set $red-alt #FF5A5A
+	set $green-alt #9DFFD2
+	set $orange-alt #FFE861
+	set $purple-alt #F9B5FF
+	set $cyan-alt #8AF9FF
+	set $pink-alt #FFAED5
+
+### Displays
+	default_border pixel 2
+# wallpaper
+	# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+	output $monitor_two bg /home/kat/Pictures/Wallpapers/16-Color/morty16color-hi.jpg fill
+	output $monitor_one bg /home/kat/Pictures/Wallpapers/16-Color/morty16color2-hi.jpg fill
+# display configs
+	output $monitor_two resolution 1920x1080 position 0,0
+	output $monitor_one resolution 1920x1080 position 1920,0
+# client.type              border     background  text  indicator  childborder
+	client.focused           $cyan-alt  $cyan-alt   $fg   $cyan-alt  
+	client.focused_inactive  $bg-alt    $bg-alt     $fg   $pink-alt  
+	client.urgent            $red       $red        $fg   $red       
+	client.unfocused         $pink      $pink       $fg   $pink      
+# GTK theming
+	set $gnome-schema org.gnome.desktop.interface
+
+	exec_always {
+		gsettings set $gnome-schema gtk-theme 'oomox-KAT'
+		gsettings set $gnome-schema icon-theme 'Papirus-Dark'
+		gsettings set $gnome-schema cursor-theme 'Adwaita'
+	}
+	gaps inner 4
+	gaps outer -4
+
+
+### Idle
+#
+# Example configuration:
+#
+	# exec swayidle -w \
+		# timeout 300 'swaylock -f -c 000000' \
+	# 	timeout 1 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+		# before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input
+	input "1155:16433:KEYCOOL_87M-LED" {
+			xkb_options caps:super
+	}
+
+### Hotkeys
+# Open htop
+	bindsym $mod+p exec --no-startup-id ~/.config/sway/sway-apps.sh --htop
+	for_window [app_id="^kitty$" title="^htop$"] floating enable
+	for_window [app_id="^kitty$" title="^htop$"] resize set width 1100 px, resize set height 300 px
+# Open Neovim
+	bindsym $mod+bracketleft exec --no-startup-id kitty "nvim"
+# Open ranger
+	bindsym $mod+o exec --no-startup-id kitty "ranger"
+# Start Firefox
+	bindsym $mod+f exec MOZ_ENABLE_WAYLAND=1 firefox
+# Start terminal
+	bindsym $mod+Return exec $term
+# Kill focused window
+	bindsym $mod+Shift+q kill
+# Start your launcher
+	bindsym $mod+d exec $menu
+# Modify floating windows, normal=right click resize
+	floating_modifier $mod normal
+# Reload sway
+	bindsym $mod+Shift+r reload
+# Use pactl to adjust volume in PulseAudio.
+	set $refresh_i3status killall -SIGUSR1 i3status
+	bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume \
+		@DEFAULT_SINK@ +10% && $refresh_i3status
+	bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume \
+		@DEFAULT_SINK@ -10% && $refresh_i3status
+	bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute \
+		@DEFAULT_SINK@ toggle && $refresh_i3status
+	bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute \
+		@DEFAULT_SOURCE@ toggle && $refresh_i3status
+# Move your focus around
+	bindsym $mod+$left focus left
+	bindsym $mod+$down focus down
+	bindsym $mod+$up focus up
+	bindsym $mod+$right focus right
+# Move the focus
+	bindsym $mod+Left focus left
+	bindsym $mod+Down focus down
+	bindsym $mod+Up focus up
+	bindsym $mod+Right focus right
+# Move the focused window
+	bindsym $mod+Shift+$left move left
+	bindsym $mod+Shift+$down move down
+	bindsym $mod+Shift+$up move up
+	bindsym $mod+Shift+$right move right
+# Move the focused window
+	bindsym $mod+Shift+Left move left
+	bindsym $mod+Shift+Down move down
+	bindsym $mod+Shift+Up move up
+	bindsym $mod+Shift+Right move right
+# Split in horizontal orientation
+	bindsym $mod+n split h
+# Split in vertical orientation
+	bindsym $mod+v split v
+# Switch the current container between different layout styles
+	bindsym $mod+s layout stacking
+	bindsym $mod+w layout tabbed
+	bindsym $mod+e layout toggle split
+# Make the current focus fullscreen
+	bindsym $mod+Shift+f fullscreen
+# Toggle the current focus between tiling and floating mode
+	bindsym $mod+Shift+space floating toggle
+# Swap focus between the tiling area and the floating area
+	bindsym $mod+space focus mode_toggle
+# Move focus to the parent container
+	bindsym $mod+a focus parent
+# Focus the child container
+	bindsym $mod+c focus child
+
+### Workspaces
+# create workspaces just on primary monitor
+	workspace 1 output $monitor_one
+	workspace 2 output $monitor_one
+	workspace 3 output $monitor_one
+	workspace 4 output $monitor_one
+	workspace 5 output $monitor_one
+	workspace 6 output $monitor_one
+	workspace 7 output $monitor_one
+	workspace 8 output $monitor_one
+	workspace 9 output $monitor_one
+	workspace 10 output $monitor_one
+# switch to workspace
+	bindsym $mod+1 workspace number $ws1
+	bindsym $mod+2 workspace number $ws2
+	bindsym $mod+3 workspace number $ws3
+	bindsym $mod+4 workspace number $ws4
+	bindsym $mod+5 workspace number $ws5
+	bindsym $mod+6 workspace number $ws6
+	bindsym $mod+7 workspace number $ws7
+	bindsym $mod+8 workspace number $ws8
+	bindsym $mod+9 workspace number $ws9
+	bindsym $mod+0 workspace number $ws10
+# move focused container to workspace
+	bindsym $mod+Shift+1 move container to workspace number $ws1
+	bindsym $mod+Shift+2 move container to workspace number $ws2
+	bindsym $mod+Shift+3 move container to workspace number $ws3
+	bindsym $mod+Shift+4 move container to workspace number $ws4
+	bindsym $mod+Shift+5 move container to workspace number $ws5
+	bindsym $mod+Shift+6 move container to workspace number $ws6
+	bindsym $mod+Shift+7 move container to workspace number $ws7
+	bindsym $mod+Shift+8 move container to workspace number $ws8
+	bindsym $mod+Shift+9 move container to workspace number $ws9
+	bindsym $mod+Shift+0 move container to workspace number $ws10
+# move focused container to workspace then move to said workspace
+	bindsym $mod+Control+1 move container to workspace number $ws1, workspace $ws1
+	bindsym $mod+Control+2 move container to workspace number $ws2, workspace $ws2
+	bindsym $mod+Control+3 move container to workspace number $ws3, workspace $ws3
+	bindsym $mod+Control+4 move container to workspace number $ws4, workspace $ws4
+	bindsym $mod+Control+5 move container to workspace number $ws5, workspace $ws5
+	bindsym $mod+Control+6 move container to workspace number $ws6, workspace $ws6
+	bindsym $mod+Control+7 move container to workspace number $ws7, workspace $ws7
+	bindsym $mod+Control+8 move container to workspace number $ws8, workspace $ws8
+	bindsym $mod+Control+9 move container to workspace number $ws9, workspace $ws9
+	bindsym $mod+Control+0 move container to workspace number $ws10, workspace $ws10
+# Discord workspace
+	workspace $dis output $monitor_one
+	bindsym $mod+F1 workspace $dis
+	assign [class="^discord$" instance="^discord$"] $dis
+# game workspace
+	workspace $gam output $monitor_one
+	bindsym $mod+F2 workspace $gam
+	bindsym $mod+Shift+F2 move container to workspace $gam
+# steam rules to keep it in its place
+	workspace $ste output $monitor_one
+	bindsym $mod+F3 workspace $ste
+	assign [class="^Steam$" instance="^Steam$"] $ste
+	for_window [class="steam" instance="steam" title="Steam Controller Configurator"] fullscreen enable
+# assign specific workspace to second monitor
+	workspace "Second Monitor: 1" output $monitor_two
+	workspace "Second Monitor: 2" output $monitor_two
+	bindsym $mod+grave workspace "Second Monitor: 1"
+
+#
+# Layout stuff:
+#
+#
+# Scratchpad:
+#
+	# Sway has a "scratchpad", which is a bag of holding for windows.
+	# You can send windows there and get them back later.
+
+	# Move the currently focused window to the scratchpad
+	bindsym $mod+Shift+minus move scratchpad
+
+	# Show the next scratchpad window or hide the focused scratchpad window.
+	# If there are multiple scratchpad windows, this command cycles through them.
+	bindsym $mod+minus scratchpad show
+
+### Modes
+# resize window with keyboard
+	mode "Resize" {
+		# These bindings trigger as soon as you enter the resize mode
+
+		# Pressing left will shrink the window’s width.
+		# Pressing right will grow the window’s width.
+		# Pressing up will shrink the window’s height.
+		# Pressing down will grow the window’s height.
+		bindsym h resize shrink width 10 px or 10 ppt
+		bindsym j resize grow height 10 px or 10 ppt
+		bindsym k resize shrink height 10 px or 10 ppt
+		bindsym l resize grow width 10 px or 10 ppt
+
+		# same bindings, but for the arrow keys
+		bindsym Left resize shrink width 10 px or 10 ppt
+		bindsym Down resize grow height 10 px or 10 ppt
+		bindsym Up resize shrink height 10 px or 10 ppt
+		bindsym Right resize grow width 10 px or 10 ppt
+
+		# back to normal: Enter or Escape or $mod+r
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+		bindsym $mod+r mode "default"
+	}
+	bindsym $mod+r mode "Resize"
+# screenshots through grim
+	set $mode_screen-capture Screen Capture: Active (w)indow, Screen (1), Screen (2), (r)ectangle, (a)ll
+	mode "$mode_screen-capture" {
+		bindsym w exec --no-startup-id $HOME/.config/sway/sway-modes.sh --capture active-window, mode "default"
+		bindsym 1 exec --no-startup-id $HOME/.config/sway/sway-modes.sh --capture screen-1, mode "default"
+		bindsym 2 exec --no-startup-id $HOME/.config/sway/sway-modes.sh --capture screen-2, mode "default"
+		bindsym --release r exec --no-startup-id $HOME/.config/sway/sway-modes.sh --capture rectangle, mode "default"
+		bindsym a exec --no-startup-id $HOME/.config/sway/sway-modes.sh --capture all, mode "default"
+		# return to normal mode
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+	}
+	bindsym $mod+Print mode "$mode_screen-capture"
+# Bluetooth management
+	set $mode_bluetooth Bluetooth: (d)isconnect, (o)pen Bluetoothctl
+	mode "$mode_bluetooth" {
+		bindsym d exec --no-startup-id $HOME/.config/i3/i3-modes.sh --bluetooth disconnect, mode "default"
+		bindsym o exec --no-startup-id $HOME/.config/i3/i3-modes.sh --bluetooth open-bluetoothctl, mode "default"
+		# return to normal mode
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+	}
+	bindsym $mod+b mode "$mode_bluetooth"
+# Sway power management
+	set $mode_system System: (e) logout, (s) suspend, (r) reboot, (p) shutdown
+	mode "$mode_system" {
+		bindsym e exec --no-startup-id ~/.config/i3/i3-modes.sh --exit logout, mode "default"
+		bindsym s exec --no-startup-id ~/.config/i3/i3-modes.sh --exit suspend, mode "default"
+		bindsym r exec --no-startup-id ~/.config/i3/i3-modes.sh --exit reboot, mode "default"
+		bindsym p exec --no-startup-id ~/.config/i3/i3-modes.sh --exit shutdown, mode "default"
+		# exit to normal mode
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+	}
+	bindsym $mod+Shift+e mode "$mode_system"
+
+## Waybar
+	bar {
+		swaybar_command waybar
+	}
+
+### Autostart
+# Start mako
+	exec mako -c ~/.config/mako/mako.conf
+# Gammastep indicator
+	exec --no-startup-id gammastep-indicator
+# Use autotiling script from: https://github.com/nwg-piotr/autotiling
+	exec_always --no-startup-id autotiling &
+# Start Discord
+	exec --no-startup-id discord
+
+### Rules
+# radeontop
+	for_window [app_id="kitty" title="radeontop"] floating enable
+	for_window [app_id="kitty" title="radeontop"] resize set 643 px 313 px
+# Discord
+	assign [class="^discord$" instance="^discord$"] $dis
+	for_window [class="^discord$" instance="^discord$"] move to workspace $dis
+# PAVU Control
+	for_window [app_id="pavucontrol" title="Volume Control"] floating enable
+	for_window [class="pavucontrol" title="Volume Control"] floating enable
+# TES Construction Set rules for more reasonable usage - namely tabbed instance so less floating fighting
+	for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Object Window$"] \
+		floating disable
+	for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Cell View$"] \
+		floating disable
+	for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Render Window$"] \
+		floating disable
+	for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^TES Construction Set$"]\
+		floating disable
+	# the above are the main windows in question and shouldn't be floating, 
+	# tertiary windows like preferences or the landscape tools should be floating and rest on top
+	for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] layout tabbed
+	for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] title_format
+	for_window [class="tesconstructionset.exe" instance="^tesconstructionset.exe$" title="GlassPanelForm"] kill
+	# run the CS in tabs with a modified title
+# Battlefront 2
+	assign [class="Wine" instance="battlefrontii.exe" title="Star Wars Battlefront II"] $gam
+# Civ 5
+	assign [class="Civ5XP" instance="Civ5XP" title="Sid Meier's Civilization V"] $gam
+# Hollow Knight
+	assign [class="hollow_knight.x86_64" instance="hollow_knight.x86_64" title="Hollow Knight"] $gam
+# Final Fantasy X
+	for_window [class="ffx&x-2_launcher.exe"] floating enable
+	for_window [class="steam_app_359870" instance="ffx&x-2_launcher.exe" title="FINAL FANTASY X/X-2 LAUNCHER"]\
+		floating enable
+# Fallout NV
+	assign [class="steam_app_22380" instance="falloutnv.exe" title="Fallout: New Vegas"] $gam
+# Oblivion
+	assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $gam
+# Dolphin-emu
+	assign [class="^dolphin-emu$" instance="^dolphin-emu$"] $gam
+	for_window [class="dolphin-emu"] move to workspace $gam
+# PCSX2
+	for_window [class="PCSX2"] border normal 3
+# bsnes
+	assign [class="Hiro" instance="hiro"] $gam
+# DUSK
+	assign [class="^DUSK.x86_64$" instance="^DUSK.x86_64$"] $gam
+# Black Mesa
+	assign [class="^bms_linux$" title="^Black Mesa - OpenGL$"] $gam
+# Pac-Man 256
+	assign [title="^PAC-MAN256$"] $gam
+# Spore Galactic Adventures
+	for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"]\
+		move to workspace $gam
+	# for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"]\
+		# floating disable, exec xdotool search --name "SPORE" set_window --name "Spore"
+# Daggerfall Unity
+	assign [class="^DaggerfallUnity.x86_64$" title="^Daggerfall Unity$"] $gam
+# Fallout 76
+	for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] move to workspace $gam
+	for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] floating disable
+# Minecraft - class is version dependent so I'll have to fix that somehow
+	assign [class="^Minecraft" instance="^Minecraft"] $gam
+	for_window [class="minecraft-launcher" instance="Minecraft Launcher" title="Minecraft Launcher"] \
+		move to workspace $gam
+# Stardew Valley
+	assign [class="StardewValley.bin.x86_64" instance="StardewValley.bin.x86_64"] $gam
+# Dragon Age: Origins
+	assign [class="steam_app_47810" instance="steam_app_47810"] $gam
+	for_window [class="steam_app_47810" instance="steam_app_47810"] floating enable
+	for_window [class="steam_app_47810" instance="steam_app_47810"] move to workspace $gam
+# iTunes
+	for_window [class="itunes.exe" instance="itunes.exe"] floating enable
+include /etc/sway/config.d/*

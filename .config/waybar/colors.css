@@ -1,0 +1,20 @@
+@define-color foreground #0f1826; /* 0 */
+@define-color foreground-alt #1C2E4A; /* 8 */
+@define-color background #bfd8ff; /* 7 */
+@define-color background-alt #DAF6FF; /* 15 */
+@define-color background-trans rgba(191, 216, 255, 0.4);
+@define-color cursor #fff7f7;
+
+@define-color red #F15656; /* 1 */
+@define-color cyan #7bb7c9; /* 6 */
+@define-color green #8CEBA9; /* 2 */
+@define-color orange #f2b15c; /* 3 */
+@define-color purple #C8A5F1; /* 5 */
+@define-color pink #F29CB1; /* 4 */
+@define-color red-alt #FF5A5A; /* 9 */
+@define-color cyan-alt #8AF9FF; /* 14 */
+@define-color green-alt #9DFFD2; /* 10 */
+@define-color orange-alt #FFE861; /* 11 */
+@define-color purple-alt #F9B5FF; /* 13 */
+@define-color pink-alt #FFAED5; /* 12 */
+

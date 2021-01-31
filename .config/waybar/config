@@ -1,0 +1,121 @@
+[{
+	"position": "bottom",
+	"height": 20,
+	"modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
+	"modules-center": ["clock"],
+	"modules-right": ["sway/window"],
+
+	"sway/workspaces": {
+		"disable-scroll": false,
+		"all-outputs": false,
+		"format": "{value}: {icon}",
+		"disable-scroll-wraparound": true,
+		"enable-bar-scroll": true,
+		"format-icons": {
+			"urgent": "",
+			"focused": "",
+			"default": "",
+			"Discord": "ﭮ",
+			"Game": " ",
+			"Steam": "",
+			"Second Monitor: 1": "",
+			"Second Monitor: 2": ""
+		}
+ },
+
+	"sway/mode": {
+		"format": "<span style=\"italic\">{}</span>",
+		"tooltip": true
+	},
+
+	"clock": {
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+		"format": "{:%I:%M:%S | %m/%d %Y}",
+		"interval": 1
+	},
+},
+
+{
+	"position": "top", // Waybar position (top|bottom|left|right)
+	"height": 17, // Waybar height (to be removed for auto height)
+	"modules-left": ["cpu", "memory", "temperature#cpu", "temperature#gpu"],
+	"modules-center": [],
+	"modules-right": ["idle_inhibitor", "pulseaudio", "network", "tray"],
+
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
+	},
+
+	"notify_disable": {
+		"exec": "echo 'disable'",
+		"on-click": "/home/kat/.config/waybar/dunst-disable.sh",
+		"format": "Toggle: {}" 
+	},
+
+	"tray": {
+		// "icon-size": 21,
+		"spacing": 4
+	},
+
+	"cpu": {
+		"format": "CPU: {usage}% ",
+		"tooltip": false,
+		"interval": 1
+	},
+
+	"memory": {
+		"format": "Used: {used:0.1f} GB ",
+		"interval": 1
+	},
+
+	"temperature#cpu": {
+		"hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+		"critical-threshold": 80,
+		"format": "CPU: {temperatureC}°C {icon}",
+		"format-icons": ["", "", ""],
+		"interval": 1
+	},
+
+	"temperature#gpu": {
+		"hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+		"critical-threshold": 80,
+		"format": "GPU: {temperatureC}°C {icon}",
+		"format-icons": ["", "", ""],
+		"interval": 1,
+		"on-click": "kitty radeontop -c"
+	},
+
+	"network": {
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "{essid} ({signalStrength}%) ",
+		"format-ethernet": "Connected ",
+		"format-linked": "{ifname} (No IP) ",
+		"format-disconnected": "Disconnected ",
+		"format-alt": "{ifname}: {ipaddr}/{cidr}"
+	},
+
+	"pulseaudio": {
+		"scroll-step": 10,
+		"format": "{volume}% {icon} {format_source}",
+		"format-bluetooth": "{volume}% {icon} {format_source}",
+		"format-bluetooth-muted": " {icon} {format_source}",
+		"format-muted": " {format_source}",
+		"format-source": "| {volume}% ",
+		"format-source-muted": "",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", "", ""]
+		},
+		"on-click": "pavucontrol",
+		"on-click-right": "pactl set-sink-mute 2 toggle"
+	},
+}]
