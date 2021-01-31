@@ -1,561 +1,356 @@
 ### Contents
+## Variables
 ## i3 Configs
 ## Displays
 ## Autostart
 ## Workspaces
 ## Hotkeys
-## App Rules
-## Game Rules
 ## Modes
+## Rules
 
-## i3 Configs
-#
-# mod key
-set $mod Mod4
-#
-# font for window titles
-font xft:meslolgs nf 9
-#
-# add window border for active window
-for_window [class=".*"] border pixel 3 
-#
-# change window color - gruvbox colors
-set_from_resource        $fg      i3wm.color0   #f0f0f0             
-set_from_resource        $red     i3wm.color9   #f0f0f0             
-set_from_resource        $green   i3wm.color14  #f0f0f0             
-set_from_resource        $orange  i3wm.color3   #f0f0f0             
-set_from_resource        $blue    i3wm.color12  #f0f0f0             
-set_from_resource        $purple  i3wm.color13  #f0f0f0             
-set_from_resource        $teal    i3wm.color6   #f0f0f0             
-set_from_resource        $gray    i3wm.color7   #f0f0f0             
-set_from_resource        $l-gray  i3wm.color8   #f0f0f0             
-#                                                                   
-#client.type             border   background    text     indicator  childborder
-#                                                                   
-client.focused           $green   $green        $fg      $orange    
-client.focused_inactive  $l-gray  $l-gray       $fg      $l-gray    
-client.urgent            $red     $red          $fg      $red       
-client.unfocused         $gray    $gray         $fg      $gray      
+### Variables
+  set $mod Mod4
+  set $left h
+  set $down j
+  set $up k
+  set $right l
+  set $term kitty
+  set $dis "Discord"
+  set $gam "Game"
+  set $ste "Steam"
+  set $ws1 "1"
+  set $ws2 "2"
+  set $ws3 "3"
+  set $ws4 "4"
+  set $ws5 "5"
+  set $ws6 "6"
+  set $ws7 "7"
+  set $ws8 "8"
+  set $ws9 "9"
+  set $ws10 "10"
+  set $monitor_one "DisplayPort-1"
+  set $monitor_two "HDMI-A-0"
+  # Colors
+  set_from_resource        $fg      i3wm.color7   #f0f0f0             
+  set_from_resource        $red     i3wm.color1   #f0f0f0             
+  set_from_resource        $green   i3wm.color14  #f0f0f0             
+  set_from_resource        $orange  i3wm.color3   #f0f0f0             
+  set_from_resource        $blue    i3wm.color12  #f0f0f0             
+  set_from_resource        $purple  i3wm.color13  #f0f0f0             
+  set_from_resource        $teal    i3wm.color6   #f0f0f0             
+  set_from_resource        $gray    i3wm.color0   #f0f0f0             
+  set_from_resource        $l-gray  i3wm.color15   #f0f0f0             
 
-
-## Displays
-#
-# set display variables
-set $monitor_one "DisplayPort-1"
-set $monitor_two "HDMI-A-0"
-#
+### Displays
 # set up primary monitor
-exec --no-startup-id xrandr --output $monitor_one --primary
-#
+  exec --no-startup-id xrandr --output $monitor_one --primary
 # set up second monitor
-exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
-
-
-## Autostart
-#
-# redshift
-exec --no-startup-id redshift-gtk
-#
-# start ds4drv
-# exec_always --no-startup-id ds4drv
-#
-# run theme at session start
-exec --no-startup-id $HOME/.config/i3/i3-theme.sh
-#
-# map tablet to primary screen at start
-exec --no-startup-id $HOME/.config/i3/tablet.sh
-#
-# apply wallpaper at start
-exec --no-startup-id nitrogen --restore &
-#
-# enable polybar as the bar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-#
-# change color at startup with wal
-# exec --no-startup-id systemctl --user start light.service
-#
-# start autokey at start
-exec --no-startup-id autokey
-#
-# start sc controller daemon at start
-exec --no-startup-id scc daemon start
-#
-# use autotiling script from: https://github.com/nwg-piotr/autotiling
-exec_always --no-startup-id autotiling &
-#
-# open discord in its own workspace at start
-set $dis "Discord"
-workspace $dis output $monitor_one
-bindsym $mod+F1 workspace $dis
-assign [class="^discord$" instance="^discord$"] $dis
-exec --no-startup-id discord
-# 
+  exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
+# font for window titles
+  font xft:fira code nerdfont 9
+# add window border for active window
+  for_window [class=".*"] border pixel 3 
+#client.type             border   background    text     indicator  childborder
+  client.focused           $teal    $teal    $gray $orange
+  client.focused_inactive  $l-gray  $l-gray  $gray  $l-gray
+  client.urgent            $red     $red     $fg  $red
+  client.unfocused         $gray    $gray    $fg  $gray
 # assign gaps
-#gaps inner 5
-#gaps outer -5
-#gaps horizontal 3
+  gaps inner 4
+  gaps outer -4
+# Assign idle behavior
+ exec_always --no-startup-id ~/.config/i3/i3-scripts.sh --idle
 
+### Autostart
+# picom
+  exec --no-startup-id picom &
+# redshift
+  exec --no-startup-id redshift-gtk
+# apply wallpaper at start
+  exec --no-startup-id nitrogen --restore &
+# enable polybar as the bar
+  exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# start autokey at start
+  exec --no-startup-id autokey-gtk
+# use autotiling script from: https://github.com/nwg-piotr/autotiling
+  exec_always --no-startup-id autotiling &
 
-## Workspaces
-##
-# game workspace
-set $gam "Game"
-workspace $gam output $monitor_one
-bindsym $mod+F2 workspace $gam
-#
+### Workspaces
+# open discord in its own workspace at start
+  workspace $dis output $monitor_one
+  bindsym $mod+F1 workspace $dis
+  assign [class="^discord$" instance="^discord$"] $dis
+  exec --no-startup-id discord
+## game workspace
+  workspace $gam output $monitor_one
+  bindsym $mod+F2 workspace $gam
 # steam rules to keep it in its place
-set $ste "Steam"
-workspace $ste output $monitor_one
-bindsym $mod+F3 workspace $ste
-assign [class="^Steam$" instance="^Steam$"] $ste
-for_window [class="steam" instance="steam" title="Steam Controller Configurator"] fullscreen enable
-#
-# scratch workspace for stuff i need to keep open
-set $scr "Scratch"
-workspace $scr output $monitor_one
-bindsym $mod+F4 workspace $scr
-#
-# create variables for unamed workspaces for primary monitor
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-#
+  workspace $ste output $monitor_one
+  bindsym $mod+F3 workspace $ste
+  assign [class="^Steam$" instance="^Steam$"] $ste
+  for_window [class="steam" instance="steam" title="Steam Controller Configurator"] fullscreen enable
+  exec --no-startup-id steam-runtime
 # create workspaces just on primary monitor
-workspace 1 output primary
-workspace 2 output primary
-workspace 3 output primary
-workspace 4 output primary
-workspace 5 output primary
-workspace 6 output primary
-workspace 7 output primary
-workspace 8 output primary
-workspace 9 output primary
-workspace 10 output primary
-#
+  workspace 1 output primary
+  workspace 2 output primary
+  workspace 3 output primary
+  workspace 4 output primary
+  workspace 5 output primary
+  workspace 6 output primary
+  workspace 7 output primary
+  workspace 8 output primary
+  workspace 9 output primary
+  workspace 10 output primary
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
-#
+  bindsym $mod+1 workspace number $ws1
+  bindsym $mod+2 workspace number $ws2
+  bindsym $mod+3 workspace number $ws3
+  bindsym $mod+4 workspace number $ws4
+  bindsym $mod+5 workspace number $ws5
+  bindsym $mod+6 workspace number $ws6
+  bindsym $mod+7 workspace number $ws7
+  bindsym $mod+8 workspace number $ws8
+  bindsym $mod+9 workspace number $ws9
+  bindsym $mod+0 workspace number $ws10
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
-#
+  bindsym $mod+Shift+1 move container to workspace number $ws1
+  bindsym $mod+Shift+2 move container to workspace number $ws2
+  bindsym $mod+Shift+3 move container to workspace number $ws3
+  bindsym $mod+Shift+4 move container to workspace number $ws4
+  bindsym $mod+Shift+5 move container to workspace number $ws5
+  bindsym $mod+Shift+6 move container to workspace number $ws6
+  bindsym $mod+Shift+7 move container to workspace number $ws7
+  bindsym $mod+Shift+8 move container to workspace number $ws8
+  bindsym $mod+Shift+9 move container to workspace number $ws9
+  bindsym $mod+Shift+0 move container to workspace number $ws10
 # move focused container to workspace then move to said workspace
-bindsym $mod+Control+1 move container to workspace number $ws1, workspace $ws1
-bindsym $mod+Control+2 move container to workspace number $ws2, workspace $ws2
-bindsym $mod+Control+3 move container to workspace number $ws3, workspace $ws3
-bindsym $mod+Control+4 move container to workspace number $ws4, workspace $ws4
-bindsym $mod+Control+5 move container to workspace number $ws5, workspace $ws5
-bindsym $mod+Control+6 move container to workspace number $ws6, workspace $ws6
-bindsym $mod+Control+7 move container to workspace number $ws7, workspace $ws7
-bindsym $mod+Control+8 move container to workspace number $ws8, workspace $ws8
-bindsym $mod+Control+9 move container to workspace number $ws9, workspace $ws9
-bindsym $mod+Control+0 move container to workspace number $ws10, workspace $ws10
-#
+  bindsym $mod+Control+1 move container to workspace number $ws1, workspace $ws1
+  bindsym $mod+Control+2 move container to workspace number $ws2, workspace $ws2
+  bindsym $mod+Control+3 move container to workspace number $ws3, workspace $ws3
+  bindsym $mod+Control+4 move container to workspace number $ws4, workspace $ws4
+  bindsym $mod+Control+5 move container to workspace number $ws5, workspace $ws5
+  bindsym $mod+Control+6 move container to workspace number $ws6, workspace $ws6
+  bindsym $mod+Control+7 move container to workspace number $ws7, workspace $ws7
+  bindsym $mod+Control+8 move container to workspace number $ws8, workspace $ws8
+  bindsym $mod+Control+9 move container to workspace number $ws9, workspace $ws9
+  bindsym $mod+Control+0 move container to workspace number $ws10, workspace $ws10
 # assign specific workspace to second monitor
-workspace "Second Monitor: 1" output $monitor_two
-workspace "Second Monitor: 2" output $monitor_two
-# 
+  workspace "Second Monitor: 1" output $monitor_two
+  workspace "Second Monitor: 2" output $monitor_two
 # switch to that workspace
-bindsym $mod+grave exec --no-startup-id $HOME/.config/i3/i3-scripts.sh --second
-#
-# move to scratch workspace
-bindsym $mod+Shift+F4 move container to workspace $scr
-#
+  bindsym $mod+grave exec --no-startup-id $HOME/.config/i3/i3-scripts.sh --second
 # move to games workspace
-bindsym $mod+Shift+F2 move container to workspace $gam
+  bindsym $mod+Shift+F2 move container to workspace $gam
+# Make the currently focused window a scratchpad
+  bindsym $mod+Shift+minus move scratchpad
+# Show the first scratchpad window
+  bindsym $mod+minus scratchpad show
 
-
-
-## Hotkeys
-#
+### Hotkeys
+# Open NeoVim
+  bindsym $mod+bracketleft exec --no-startup-id kitty "nvim"
+# Open ranger
+  bindsym $mod+o exec --no-startup-id kitty "ranger"
+# Open FireFox
+  bindsym $mod+f exec --no-startup-id MOZ_X11_EGL=1 firefox
+# Open htop
+  bindsym $mod+p exec --no-startup-id ~/.config/i3/i3-apps.sh --htop
+  for_window [instance="^kitty$" title="^htop$"] floating enable
+  for_window [instance="^kitty$" title="^htop$"] resize set width 1100 px, resize set height 300 px
+# Open conky
+  bindsym $mod+i exec --no-startup-id ~/.config/i3/i3-apps.sh --conky
+  for_window [class="^Conky$" instance="^Conky$"] floating enable
+  for_window [class="^Conky$" instance="^Conky$"] resize set width 500 px, resize set height 1000 px, focus
+# Open PAVU floating
+  bindsym $mod+F9 exec --no-startup-id pavucontrol
+  for_window [class="Pavucontrol" instance="pavucontrol" title="Volume Control"] floating enable
 # create a mark
-bindsym $mod+m exec --no-startup-id $HOME/.config/i3/i3-menus.sh --create-mark
-#
+  bindsym $mod+m exec --no-startup-id $HOME/.config/i3/i3-menus.sh --create-mark
 # list marks
-bindsym $mod+apostrophe exec --no-startup-id $HOME/.config/i3/i3-menus.sh --marks
-#
+  bindsym $mod+apostrophe exec --no-startup-id $HOME/.config/i3/i3-menus.sh --marks
 # search active windows with dmenu
-bindsym $mod+g exec --no-startup-id $HOME/.config/i3/i3-menus.sh --active
-#
+  bindsym $mod+g exec --no-startup-id $HOME/.config/i3/i3-menus.sh --active
 # open certain configurations
-bindsym $mod+Shift+d exec --no-startup-id $HOME/.config/i3/i3-menus.sh --open
-#
+  bindsym $mod+Shift+d exec --no-startup-id $HOME/.config/i3/i3-menus.sh --open
 # reload the configuration file
-bindsym $mod+Shift+c reload
-#
+  bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-#
+  bindsym $mod+Shift+r restart
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-#
+  set $refresh_i3status killall -SIGUSR1 i3status
+  bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+  bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+  bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+  bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 # start a terminal
-bindsym $mod+Return exec --no-startup-id kitty
-#
+  bindsym $mod+Return exec --no-startup-id kitty
 # kill focused window
-bindsym $mod+Shift+q kill
-#
+  bindsym $mod+Shift+q kill
 # start rofi symlinked as dmenu, read desktop files instead
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-#
+  bindsym $mod+d exec --no-startup-id rofi -show drun -icon-theme "Papirus" -show-icons
 # change focus with Vim bindings
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-#
+  bindsym $mod+h focus left
+  bindsym $mod+j focus down
+  bindsym $mod+k focus up
+  bindsym $mod+l focus right
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-#
+  bindsym $mod+Left focus left
+  bindsym $mod+Down focus down
+  bindsym $mod+Up focus up
+  bindsym $mod+Right focus right
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-#
+  bindsym $mod+Shift+h move left
+  bindsym $mod+Shift+j move down
+  bindsym $mod+Shift+k move up
+  bindsym $mod+Shift+l move right
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-#
+  bindsym $mod+Shift+Left move left
+  bindsym $mod+Shift+Down move down
+  bindsym $mod+Shift+Up move up
+  bindsym $mod+Shift+Right move right
 # split in horizontal orientation
-bindsym $mod+n split h
-#
+  bindsym $mod+n split h
 # split in vertical orientation
-bindsym $mod+v split v
-#
+  bindsym $mod+v split v
 # enter fullscreen mode for the focused container
-bindsym $mod+Shift+f fullscreen toggle
-#
+  bindsym $mod+Shift+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-#
+  bindsym $mod+s layout stacking
+  bindsym $mod+w layout tabbed
+  bindsym $mod+e layout toggle split
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-#
+  bindsym $mod+Shift+space floating toggle
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-#
+  floating_modifier $mod
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-#
+  bindsym $mod+space focus mode_toggle
 # focus the parent container
-bindsym $mod+a focus parent
-#
+  bindsym $mod+a focus parent
 # focus the child container
-bindsym $mod+c focus child
+  bindsym $mod+c focus child
 
-
-## App Rules
-#
-# Open Neovim
-bindsym $mod+bracketleft exec --no-startup-id kitty "nvim"
-#
-# open ranger
-bindsym $mod+o exec --no-startup-id kitty "ranger"
-#
-# open firefox
-bindsym $mod+f exec --no-startup-id MOZ_X11_EGL=1 firefox
-#
-# open htop
-bindsym $mod+p exec --no-startup-id ~/.config/i3/i3-apps.sh --htop
-for_window [instance="^kitty$" title="^htop$"] floating enable
-for_window [instance="^kitty$" title="^htop$"] resize set width 1100 px, resize set height 300 px
-#
-# open conky
-bindsym $mod+i exec --no-startup-id ~/.config/i3/i3-apps.sh --conky
-for_window [class="^Conky$" instance="^Conky$"] floating enable
-for_window [class="^Conky$" instance="^Conky$"] resize set width 500 px, resize set height 1000 px, focus
-#
-# open PAVU floating
-bindsym $mod+F9 exec --no-startup-id pavucontrol
-for_window [class="Pavucontrol" instance="pavucontrol" title="Volume Control"] floating enable
-#
-# TES Construction Set rules for more reasonable usage - namely tabbed instance so less floating fighting
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Object Window$"] floating disable
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Cell View$"] floating disable
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Render Window$"] floating disable
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^TES Construction Set$"] floating disable
-	# the above are the main windows in question and shouldn't be floating, 
-	# tertiary windows like preferences or the landscape tools should be floating and rest on top
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] layout tabbed
-for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] title_format
-	# run the CS in tabs with a modified title
-
-
-## Game Rules
-# these open up the apps in the desired workspace
-#
-# Battlefront 2
-assign [class="Wine" instance="battlefrontii.exe" title="Star Wars Battlefront II"] $gam
-#
-# Civ 5
-assign [class="Civ5XP" instance="Civ5XP" title="Sid Meier's Civilization V"] $gam
-#
-# Hollow Knight
-assign [class="hollow_knight.x86_64" instance="hollow_knight.x86_64" title="Hollow Knight"] $gam
-#
-# Final Fantasy X
-for_window [class="ffx&x-2_launcher.exe"] floating enable
-for_window [class="steam_app_359870" instance="ffx&x-2_launcher.exe" title="FINAL FANTASY X/X-2 LAUNCHER"] floating enable
-#
-# Fallout NV
-assign [class="steam_app_22380" instance="falloutnv.exe" title="Fallout: New Vegas"] $gam
-#
-# Oblivion
-assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $gam
-#
-# Dolphin-emu
-assign [class="^dolphin-emu$" instance="^dolphin-emu$"] $gam
-for_window [class="dolphin-emu"] move to workspace $gam
-#
-# PCSX2
-for_window [class="PCSX2"] border normal 3
-#
-# bsnes
-assign [class="Hiro" instance="hiro"] $gam
-#
-# DUSK
-assign [class="^DUSK.x86_64$" instance="^DUSK.x86_64$"] $gam
-# 
-# Black Mesa
-assign [class="^bms_linux$" title="^Black Mesa - OpenGL$"] $gam
-#
-# Pac-Man 256
-assign [title="^PAC-MAN256$"] $gam
-#
-# Spore Galactic Adventures
-for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"] move to workspace $gam
-for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"] floating disable, exec xdotool search --name "SPORE" set_window --name "Spore"
-#
-# Daggerfall Unity
-assign [class="^DaggerfallUnity.x86_64$" title="^Daggerfall Unity$"] $gam
-#
-# Fallout 76
-for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] move to workspace $gam
-for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] floating disable
-#
-# Minecraft - class is version dependent so I'll have to fix that somehow
-assign [class="^Minecraft" instance="^Minecraft"] $gam
-for_window [class="minecraft-launcher" instance="Minecraft Launcher" title="Minecraft Launcher"] move to workspace $gam
-
-
-## Modes
+### Modes
 # bluetooth management
-set $mode_bluetooth Bluetooth: (d) disconnect, (o) open-dluetoothctl
-mode "$mode_bluetooth" {
-	bindsym d exec --no-startup-id $HOME/.config/i3/i3-modes.sh --bluetooth disconnect, mode "default"
-	bindsym o exec --no-startup-id $HOME/.config/i3/i3-modes.sh --bluetooth open-bluetoothctl, mode "default"
-	# return to normal mode
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+b mode "$mode_bluetooth"
-#
+  set $mode_bluetooth Bluetooth: (d)isconnect, (o)pen-dluetoothctl
+  mode "$mode_bluetooth" {
+    bindsym d exec --no-startup-id $HOME/.config/i3/i3-modes.sh --bluetooth disconnect, mode "default"
+    bindsym o exec --no-startup-id $HOME/.config/i3/i3-modes.sh --bluetooth open-bluetoothctl, mode "default"
+    # return to normal mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+  bindsym $mod+b mode "$mode_bluetooth"
+
 # screenshots through scrot
-set $mode_screen-capture (w) active-window, (1) screen-1, (2) screen-2, (r) rectangle, (a) all
-mode "$mode_screen-capture" {
-	bindsym w exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture active-window, mode "default"
-	bindsym 1 exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture screen-1, mode "default"
-	bindsym 2 exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture screen-2, mode "default"
-	bindsym --release r exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture rectangle, mode "default"
-	bindsym a exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture all, mode "default"
-	# return to normal mode
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+Print mode "$mode_screen-capture"
-#
+  set $mode_screen-capture Screen Capture: active-(w)indow, screen-(1), screen-(2), (r)ectangle, (a)ll
+  mode "$mode_screen-capture" {
+    bindsym w exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture active-window, mode "default"
+    bindsym 1 exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture screen-1, mode "default"
+    bindsym 2 exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture screen-2, mode "default"
+    bindsym --release r exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture rectangle, mode "default"
+    bindsym a exec --no-startup-id $HOME/.config/i3/i3-modes.sh --capture all, mode "default"
+    # return to normal mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+  bindsym $mod+Print mode "$mode_screen-capture"
+
 # for i3 power management
-set $mode_system System (e) logout, (s) suspend, (r) reboot, (p) shutdown
-mode "$mode_system" {
-	bindsym e exec --no-startup-id ~/.config/i3/i3-modes.sh --exit logout, mode "default"
-	bindsym s exec --no-startup-id ~/.config/i3/i3-modes.sh --exit suspend, mode "default"
-	bindsym r exec --no-startup-id ~/.config/i3/i3-modes.sh --exit reboot, mode "default"
-	bindsym p exec --no-startup-id ~/.config/i3/i3-modes.sh --exit shutdown, mode "default"
-	# exit to normal mode
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+Shift+e mode "$mode_system"
-#
+  set $mode_system System: (e) logout, (s) suspend, (r) reboot, (p) shutdown
+  mode "$mode_system" {
+    bindsym e exec --no-startup-id ~/.config/i3/i3-modes.sh --exit logout, mode "default"
+    bindsym s exec --no-startup-id ~/.config/i3/i3-modes.sh --exit suspend, mode "default"
+    bindsym r exec --no-startup-id ~/.config/i3/i3-modes.sh --exit reboot, mode "default"
+    bindsym p exec --no-startup-id ~/.config/i3/i3-modes.sh --exit shutdown, mode "default"
+    # exit to normal mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+  bindsym $mod+Shift+e mode "$mode_system"
+
 # resize window with keyboard
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+  mode "resize" {
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+  }
+  bindsym $mod+r mode "resize"
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "resize"
-#
-# runtime gaps
-set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_horiz Horizontal Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_verti Vertical Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_top Top Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_right Right Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_bottom Bottom Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_left Left Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
+### Rules
+# Dialog Window Floating
+  for_window [window_role="pop-up"] floating enable
+  for_window [window_role="task_dialog"] floating enable
+# TES Construction Set rules for more reasonable usage - namely tabbed instance so less floating fighting
+  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Object Window$"]\
+    floating disable
+  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Cell View$"]\
+    floating disable
+  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Render Window$"]\
+    floating disable
+  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^TES Construction Set$"]\
+    floating disable
+    # the above are the main windows in question and shouldn't be floating, 
+    # tertiary windows like preferences or the landscape tools should be floating and rest on top
+  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] layout tabbed
+  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] title_format
+  for_window [class="tesconstructionset.exe" instance="^tesconstructionset.exe$" title="GlassPanelForm"] kill
+# Battlefront 2
+  assign [class="Wine" instance="battlefrontii.exe" title="Star Wars Battlefront II"] $gam
+# Civ 5
+  assign [class="Civ5XP" instance="Civ5XP" title="Sid Meier's Civilization V"] $gam
+# Hollow Knight
+  assign [class="hollow_knight.x86_64" instance="hollow_knight.x86_64" title="Hollow Knight"] $gam
+# Final Fantasy X
+  for_window [class="ffx&x-2_launcher.exe"] floating enable
+  for_window [class="steam_app_359870" instance="ffx&x-2_launcher.exe" title="FINAL FANTASY X/X-2 LAUNCHER"]\
+    floating enable
+# Fallout NV
+  assign [class="steam_app_22380" instance="falloutnv.exe" title="Fallout: New Vegas"] $gam
+# Oblivion
+  assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $gam
+# Dolphin-emu
+  assign [class="^dolphin-emu$" instance="^dolphin-emu$"] $gam
+  for_window [class="dolphin-emu"] move to workspace $gam
+# PCSX2
+  for_window [class="PCSX2"] border normal 3
+# bsnes
+  assign [class="Hiro" instance="hiro"] $gam
+# DUSK
+  assign [class="^DUSK.x86_64$" instance="^DUSK.x86_64$"] $gam
+# Black Mesa
+  assign [class="^bms_linux$" title="^Black Mesa - OpenGL$"] $gam
+# Pac-Man 256
+  assign [title="^PAC-MAN256$"] $gam
+# Spore Galactic Adventures
+  for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"]\
+    move to workspace $gam
+  for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"]\
+    floating disable, exec xdotool search --name "SPORE" set_window --name "Spore"
+# Daggerfall Unity
+  assign [class="^DaggerfallUnity.x86_64$" title="^Daggerfall Unity$"] $gam
+# Fallout 76
+  for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] move to workspace $gam
+  for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] floating disable
+# Minecraft - class is version dependent so I'll have to fix that somehow
+  assign [class="^Minecraft" instance="^Minecraft"] $gam
+  for_window [class="minecraft-launcher" instance="Minecraft Launcher" title="Minecraft Launcher"]\
+    move to workspace $gam
+# Stardew Valley
+  assign [class="StardewValley.bin.x86_64" instance="StardewValley.bin.x86_64"] $gam
+# Dragon Age: Origins
+  assign [class="steam_app_47810" instance="steam_app_47810"] $gam
+  for_window [class="steam_app_47810" instance="steam_app_47810"] floating enable
+  for_window [class="steam_app_47810" instance="steam_app_47810"] move to workspace $gam
+# iTunes
+  for_window [class="itunes.exe" instance="itunes.exe"] floating enable
 
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym h      mode "$mode_gaps_horiz"
-        bindsym v      mode "$mode_gaps_verti"
-        bindsym t      mode "$mode_gaps_top"
-        bindsym r      mode "$mode_gaps_right"
-        bindsym b      mode "$mode_gaps_bottom"
-        bindsym l      mode "$mode_gaps_left"
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_horiz" {
-        bindsym plus  gaps horizontal current plus 5
-        bindsym minus gaps horizontal current minus 5
-        bindsym 0     gaps horizontal current set 0
-
-        bindsym Shift+plus  gaps horizontal all plus 5
-        bindsym Shift+minus gaps horizontal all minus 5
-        bindsym Shift+0     gaps horizontal all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_verti" {
-        bindsym plus  gaps vertical current plus 5
-        bindsym minus gaps vertical current minus 5
-        bindsym 0     gaps vertical current set 0
-
-        bindsym Shift+plus  gaps vertical all plus 5
-        bindsym Shift+minus gaps vertical all minus 5
-        bindsym Shift+0     gaps vertical all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_top" {
-        bindsym plus  gaps top current plus 5
-        bindsym minus gaps top current minus 5
-        bindsym 0     gaps top current set 0
-
-        bindsym Shift+plus  gaps top all plus 5
-        bindsym Shift+minus gaps top all minus 5
-        bindsym Shift+0     gaps top all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_right" {
-        bindsym plus  gaps right current plus 5
-        bindsym minus gaps right current minus 5
-        bindsym 0     gaps right current set 0
-
-        bindsym Shift+plus  gaps right all plus 5
-        bindsym Shift+minus gaps right all minus 5
-        bindsym Shift+0     gaps right all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_bottom" {
-        bindsym plus  gaps bottom current plus 5
-        bindsym minus gaps bottom current minus 5
-        bindsym 0     gaps bottom current set 0
-
-        bindsym Shift+plus  gaps bottom all plus 5
-        bindsym Shift+minus gaps bottom all minus 5
-        bindsym Shift+0     gaps bottom all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_left" {
-        bindsym plus  gaps left current plus 5
-        bindsym minus gaps left current minus 5
-        bindsym 0     gaps left current set 0
-
-        bindsym Shift+plus  gaps left all plus 5
-        bindsym Shift+minus gaps left all minus 5
-        bindsym Shift+0     gaps left all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"

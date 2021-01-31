@@ -1,14 +1,13 @@
 configuration {
-font: "MesloLGS NF 12";
+font: "Fira Code NerdFont 12";
 modi: "drun,window,run,ssh,combi";
-/* Dark theme.*/
-theme: "~/.cache/wal/colors-rofi-dark.rasi";
-
-/* Light theme. idk why this is here, things still switch properly*/
-/*theme: "~/.cache/wal/colors-rofi-light.rasi";*/
+theme: "~/.config/rofi/kat.rasi";
 columns: 3;
 width: 800;
 lines: 10;
+location: 5;
+xoffset: -30;
+yoffset: -30;
 kb-move-word-back: "Alt+b,Control+Left";
 kb-move-word-forward: "Alt+f,Control+Right";
 kb-move-char-back: "Left,Control+b";
@@ -36,4 +35,4 @@ kb-row-first: "Home,KP_Home";
 kb-row-last: "End,KP_End";
 kb-row-select: "Control+space";
 }
-@import "gruvbox-common.rasi"
+element-icon { size: 3.65ch ; }

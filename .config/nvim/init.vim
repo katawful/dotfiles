@@ -10,13 +10,11 @@ Plug 'vim-airline/vim-airline-themes'
 "VimTeX
 Plug 'lervag/vimtex'
 " Vim latex live prwview
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'xuhdev/vim-latex-live-preview'
 " UltiSnips
 Plug 'SirVer/ultisnips'
 " Vimwiki
 Plug 'vimwiki/vimwiki'
-" Vim wal theme
-Plug 'dylanaraps/wal.vim'
 " vim-devicons
 Plug 'ryanoasis/vim-devicons'
 " fzf
@@ -41,6 +39,11 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'sentriz/vim-print-debug'
 " vim commentary
 Plug 'tpope/vim-commentary'
+" coc.nvim lua
+Plug 'rafcamlet/coc-nvim-lua'
+" Obli-Vim
+Plug 'katawful/Obli-Vim', {'for': 'obse', 'branch': 'cse-plugin'}
+Plug 'katawful/Obli-Vim-Docs', {'for': 'obse'}
 
 call plug#end()
 
@@ -52,8 +55,6 @@ source ~/.config/nvim/vim-main/bindings.vim
 source ~/.config/nvim/vim-main/functions.vim
 "" Airline
 source ~/.config/nvim/plugin-config/airline.vim
-"" wal.vim
-source ~/.config/nvim/plugin-config/pywal.vim
 "" FZF/fzf.vim
 source ~/.config/nvim/plugin-config/fzf.vim
 "" NerdTree

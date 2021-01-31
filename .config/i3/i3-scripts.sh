@@ -34,6 +34,20 @@ i3secondmonitor ()
 	fi
 }
 
+i3idle() {
+  # Run xidlehook
+  xidlehook \
+    --not-when-fullscreen \
+    --not-when-audio \
+    --timer 600 \
+    'betterlockscreen -l dimblur' \
+    '' \
+    --timer 3600 \
+    'systemctl suspend' \
+    ''
+}
+
 case "$1" in
 	(--second) i3secondmonitor ;;
+    (--idle) i3idle ;;
 esac

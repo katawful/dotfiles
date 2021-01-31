@@ -57,3 +57,6 @@ alias nvmod="STEAM_COMPAT_DATA_PATH=~/.local/share/Steam/steamapps/compatdata/22
 # udisks aliases
 alias udmount='udisksctl mount -b'
 alias udumount='udisksctl unmount -b'
+
+# ncdu
+alias ncdu='ncdu --color dark '

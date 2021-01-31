@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# This watches for sleep with dbus
+dbus-monitor --system "type='signal',interface='org.freedesktop.login1.Manager',member=PrepareForSleep" | while read x; do
+    case "$x" in
+        *"boolean false"*) echo "HELP" && systemctl --user --no-block stop user-sleep.target;;
+        *"boolean true"*) echo "FUCK" && systemctl --user --no-block start user-sleep.target;;
+    esac
+done

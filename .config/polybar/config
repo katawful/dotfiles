@@ -1,61 +1,59 @@
 [colors]
-background = ${xrdb:background:#222}
-;foreground = ${xrdb:foreground:#222}
-foreground = ${xrdb:color15:#222}
-red        = ${xrdb:color1:#222}
-green      = ${xrdb:color2:#222}
-yellow     = ${xrdb:color3:#222}
-blue       = ${xrdb:color4:#222}
-purple     = ${xrdb:color5:#222}
-teal       = ${xrdb:color6:#222}
-;theres no orange in the gruvbox pywal theme, use something else
-orange     = ${xrdb:color15:#222}
-gray       = ${xrdb:color8:#222}
-lgray	   = ${xrdb:color7:#222}
+background      =  ${xrdb:color8:#222}
+red             =  ${xrdb:color1:#222}
+green           =  ${xrdb:color2:#222}
+orange          =  ${xrdb:color3:#222}
+pink            =  ${xrdb:color4:#222}
+purple          =  ${xrdb:color5:#222}
+teal            =  ${xrdb:color6:#222}
+foreground-alt  =  ${xrdb:color7:#222}
+background-alt  =  ${xrdb:color0:#222}
+red-alt         =  ${xrdb:color9:#222}
+green-alt       =  ${xrdb:color10:#222}
+orange-alt      =  ${xrdb:color11:#222}
+pink-alt        =  ${xrdb:color12:#222}
+purple-alt      =  ${xrdb:color13:#222}
+teal-alt        =  ${xrdb:color14:#222}
+foreground      =  ${xrdb:color15:#222}
 
 [bar/bottombar]
 monitor=${env:MONITOR}
 ; Size
 width  = 100%
 height = 22
-
 ; Position
 bottom = true
-
 ; Radius
 radius = 0
-
 ; Align modules fixed to middle
 fixed-center = true
-
 ; Colors
-background = ${colors.background}
+; background = ${colors.foreground}
+background = #00ffffff
 foreground = ${colors.foreground}
-
 ; Underline
 line-size  = 2
 line-color = ${colors.foreground}
-
 ; Border
 border-size  = 0
 border-color = ${colors.foreground}
 
 ; Padding
-padding-left  = 0
-padding-right = 0
+padding-left  = 2
+padding-right = 2
 
 ; Margin of modules
 module-margin-left  = 0
 module-margin-right = 0
 
 ; Font
-font-0 = meslolgs nf:size=9;2
+font-0 = FiraCode Nerd Font:style=Regular:size=9;2
 font-1 = Font Awesome 5 Free Solid:size=10;2
-font-2 = materialicons:size=10;2
+font-2 = FiraCode Nerd Font:style=Regular:size=16;3
 
 ; Modlues
 modules-left   = i3 
-modules-center = 
+modules-center = time date
 modules-right  = window-script xwindow
 
 ; Cursor actions
@@ -69,7 +67,7 @@ scroll-down = #i3.next
 monitor=${env:MONITOR}
 ; Size
 width  = 100%
-height = 14
+height = 22
 
 ; Position
 bottom = false
@@ -81,11 +79,11 @@ radius = 0
 fixed-center = true
 
 ; Colors
-background = ${colors.background}
+background = #00ffffff
 foreground = ${colors.foreground}
 
 ; Underline
-line-size  = 1
+line-size  = 2
 line-color = ${colors.foreground}
 
 ; Border
@@ -93,27 +91,30 @@ border-size  = 0
 border-color = ${colors.foreground}
 
 ; Padding
-padding-left  = 0
-padding-right = 0
+padding-left  = 2
+padding-right = 2
 
 ; Margin of modules
 module-margin-left  = 0
 module-margin-right = 0
 
 ; Font
-font-0 = meslolgs nf:size=8;2
-font-1 = Font Awesome 5 Free Solid:size=9;2
-font-2 = materialicons:size=9;2
+font-0 = FiraCode Nerd Font:style=Regular:size=9;2
+font-1 = Font Awesome 5 Free Solid:size=10;2
+font-2 = FiraCode Nerd Font:style=Regular:size=16;3
+font-3 = FiraCode Nerd Font:style=Regular:size=28;5
+font-4 = FiraCode Nerd Font:style=Regular:size=12;2
 
 ; Modlues
-modules-left   = updates-arch-aur memory cpu system-cpu-temppercore
-modules-center = time date
-modules-right  = eth pulseaudio bluetooth-script  
+modules-left   = updates-arch-aur memory cpu temperature system-cpu-temppercore
+modules-center =
+modules-right  = eth pulseaudio filesystem bluetooth-script  
 tray-position = right
 tray-padding = 4
-tray-maxsize = 12
+tray-maxsize = 18
 tray-scale = 1.0
-tray-background = ${colors.red}
+tray-offset-x = -10
+tray-background = ${colors.background}
 
 ; Cursor actions
 cursor-click  = pointer
@@ -121,8 +122,11 @@ cursor-click  = pointer
 [module/xwindow]
 type = internal/xwindow
 format = <label>
-label-background = ${colors.gray}
+label-maxlen = 60
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 label-padding = 1
 
 [module/bluetooth-script]
@@ -130,9 +134,17 @@ type = custom/script
 exec = ~/.config/polybar/scripts/info-dualshock4.sh
 tail = false
 interval = 0
+format-prefix = ""
+format-prefix-font = 4
+format-prefix-foreground = ${colors.foreground}
+format-prefix-background = ${colors.background}
+format-prefix-underline = ${colors.foreground}
+format-prefix-overline = ${colors.foreground}
 label-padding = 1
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
-label-background = ${colors.red}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 
 [module/test-script]
 type = custom/script
@@ -150,8 +162,10 @@ exec =~/.config/i3/i3-menus.sh --window-name
 tail = true
 interval = 0
 label-padding = 1
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
-label-background = ${colors.gray}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 click-left = ~/.config/i3/i3-menus.sh --active
 
 
@@ -159,8 +173,16 @@ click-left = ~/.config/i3/i3-menus.sh --active
 type = custom/script
 exec = ~/.config/polybar/scripts/updates-arch-aur.sh
 interval = 1200
-label-background = ${colors.red}
+format-suffix = ""
+format-suffix-font = 4
+format-suffix-foreground = ${colors.foreground}
+format-suffix-background = ${colors.background}
+format-suffix-underline = ${colors.foreground}
+format-suffix-overline = ${colors.foreground}
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 label-padding = 1
 
 [module/i3]
@@ -175,6 +197,12 @@ enable-scroll = false
 index-sort = true
 ; Display icons
 fuzzy-match = true
+label-mode = %mode%
+label-mode-background = ${colors.background}
+label-mode-foreground = ${colors.foreground}
+label-mode-underline = ${colors.foreground}
+label-mode-overline = ${colors.foreground}
+label-mode-padding = 1
 ; Icons
 ws-icon-0       = Discord;ﭮ
 ws-icon-1       = Game; 
@@ -185,34 +213,49 @@ ws-icon-default = ﲾ
 pin-workspaces = true
 ; Focused label
 label-focused            = %icon%  %name%
-label-focused-background = ${colors.green}
-label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.teal}
+label-focused-foreground = ${colors.background}
+label-focused-underline = ${colors.foreground-alt}
+label-focused-overline = ${colors.foreground-alt}
 label-focused-padding    = 1
 ; Unfocused label
 label-unfocused            = %icon%  %name%
 label-unfocused-background = ${colors.background}
 label-unfocused-foreground = ${colors.foreground}
+label-unfocused-underline = ${colors.foreground}
+label-unfocused-overline = ${colors.foreground}
 label-unfocused-padding    = 1
 ; Visible labels
 label-visible            = %icon%  %name%
 label-visible-foreground = ${colors.foreground}
+label-visible-background = ${colors.background}
+label-visible-underline = ${colors.foreground}
+label-visible-overline = ${colors.foreground}
 label-visible-padding    = 1
 ; Urgent labels
 label-urgent            = %icon%  %name%
 label-urgent-foreground = ${colors.red}
+label-urgent-background = ${colors.background}
+label-urgent-underline = ${colors.foreground}
+label-urgent-overline = ${colors.foreground}
 label-urgent-padding    = 1
 
 [module/system-cpu-temppercore]
 type = custom/script
 exec = ~/.config/polybar/scripts/system-cpu-temppercore.sh
-;exec = ~/temp-sensors
+;exec = ~/temp-sensors
 interval = 5
-label-background = ${colors.yellow}
+format-prefix = ""
+format-prefix-font = 4
+format-prefix-foreground = ${colors.foreground}
+format-prefix-background = ${colors.background}
+format-prefix-underline = ${colors.foreground}
+format-prefix-overline = ${colors.foreground}
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 label-padding = 1
-format-suffix = "▓▒░"
-format-suffix-background = ${colors.background}
-format-suffix-foreground = ${colors.yellow}
 
 [module/time]
 type = internal/date
@@ -222,7 +265,10 @@ interval = 1.0
 time = %I:%M%P
 ; Label
 label            =  %time%
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 label-padding    = 1
 
 [module/date]
@@ -233,7 +279,10 @@ interval = 1.0
 date = %A, %d %B
 ; Label
 label            = " %date%"
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 label-padding    = 1
 
 [module/filesystem]
@@ -241,93 +290,94 @@ type = internal/fs
 interval = 25
 mount-0 = /home
 mount-1 = /run/media/HDD
-label-mounted = %{F#b16286}%mountpoint%%{F-}: %percentage_free%%
-label-mounted-background = ${colors.purple}
+mount-2 = /
+format-mounted-prefix = ""
+format-mounted-prefix-font = 4
+format-mounted-prefix-foreground = ${colors.foreground}
+format-mounted-prefix-background = ${colors.background}
+format-mounted-prefix-underline = ${colors.foreground}
+format-mounted-prefix-overline = ${colors.foreground}
+label-mounted = "%mountpoint%: %free% "
+label-mounted-background = ${colors.background}
+label-mounted-underline = ${colors.foreground}
+label-mounted-overline = ${colors.foreground}
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.red}
-label-background = ${colors.purple}
+spacing = 0
 
 [module/cpu]
 type = internal/cpu
 interval = 2
 label = " CPU: %percentage:2%%"
-label-background = ${colors.blue}
+format-prefix = ""
+format-prefix-font = 4
+format-prefix-foreground = ${colors.foreground}
+format-prefix-background = ${colors.background}
+format-prefix-underline = ${colors.foreground}
+format-prefix-overline = ${colors.foreground}
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 label-padding = 1
 
 [module/memory]
 type = internal/memory
 interval = 2
 format = <label>
-format-prefix-foreground = ${colors.purple}
 label =  %gb_used%/%gb_total%
-label-background = ${colors.purple}
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 label-padding = 1
 
 [module/eth]
 type = internal/network
 interface = enp4s0
 interval = 3.0
-
-format-connected-prefix = "░▒▓"
+format-connected-prefix = " " 
+format-connected-prefix-font = 1
+format-connected-prefix-foreground = ${colors.foreground}
 format-connected-prefix-background = ${colors.background}
-format-connected-prefix-foreground = ${colors.teal}
+format-connected-prefix-underline = ${colors.foreground}
+format-connected-prefix-overline = ${colors.foreground}
 label-connected = " Connected  "
+label-connected-background = ${colors.background}
 label-connected-foreground = ${colors.foreground}
-label-connected-background = ${colors.teal}
+label-connected-underline = ${colors.foreground}
+label-connected-overline = ${colors.foreground}
 label-padding = 1
-
 ;format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
-format-disconnected-prefix = "░▒▓"
-format-disconnected-prefix-background = ${colors.background}
-format-disconnected-prefix-foreground = ${colors.teal}
-label-disconnected = " Disconnected "
+label-disconnected-background = ${colors.red-alt}
 label-disconnected-foreground = ${colors.foreground}
-
-[module/battery]
-type = internal/battery
-
-; Full battery level
-full-at = 96
-
-; Battery and adapter
-battery = BAT0
-adapter = AC0
-
-; Charging label
-label-charging            =  %percentage%%
-label-charging-background = ${colors.teal}
-label-charging-foreground = ${colors.foreground}
-label-charging-padding    = 2
-
-; Discharging label
-label-discharging            =  %percentage%%
-label-discharging-background = ${colors.red}
-label-discharging-foreground = ${colors.foreground}
-label-discharging-padding    = 2
-
-; Full label
-label-full            =  100%
-label-full-background = ${colors.teal}
-label-full-foreground = ${colors.foreground}
-label-full-padding    = 2
+label-disconnected-underline = ${colors.foreground}
+label-disconnected-overline = ${colors.foreground}
 
 [module/temperature]
 type = internal/temperature
-
+thermal-zone = 2
 ; Label
+format-prefix = ""
+format-prefix-font = 4
+format-prefix-foreground = ${colors.foreground}
+format-prefix-background = ${colors.background}
+format-prefix-underline = ${colors.foreground}
+format-prefix-overline = ${colors.foreground}
 label            =  %temperature%
-label-background = ${colors.orange}
+label-background = ${colors.background}
 label-foreground = ${colors.foreground}
+label-underline = ${colors.foreground}
+label-overline = ${colors.foreground}
 label-padding    = 1
-
 ; Warning label
 label-warn            =  %temperature%
-label-warn-background = ${colors.red}
+label-warn-background = ${colors.background}
 label-warn-foreground = ${colors.foreground}
+label-warn-underline = ${colors.foreground}
+label-warn-overline = ${colors.foreground}
 label-warn-padding    = 1
 
 [module/pulseaudio]
@@ -336,27 +386,50 @@ type = internal/pulseaudio
 ; Volume label
 format-volume = <ramp-volume><label-volume>
 label-volume            = %percentage%%
+format-volume-prefix = ""
+format-volume-prefix-font = 4
+format-volume-prefix-foreground = ${colors.foreground}
+format-volume-prefix-background = ${colors.background}
+format-volume-prefix-underline = ${colors.foreground}
+format-volume-prefix-overline = ${colors.foreground}
+format-volume-prefix-padding = 0
 ramp-volume-0 = "  "
 ramp-volume-1 = " 奔"
 ramp-volume-2 = " 墳"
-ramp-volume-background = ${colors.green}
+ramp-volume-font = 5
+ramp-volume-background = ${colors.background}
+ramp-volume-foreground = ${colors.foreground}
+ramp-volume-underline = ${colors.foreground}
+ramp-volume-overline = ${colors.foreground}
 ramp-volume-padding = 0
-label-volume-background = ${colors.green}
+label-volume-background = ${colors.background}
 label-volume-foreground = ${colors.foreground}
+label-volume-underline = ${colors.foreground}
+label-volume-overline = ${colors.foreground}
 label-volume-padding    = 1
 
 ; Muted label
 label-muted            = ﱝ Muted
 label-muted-background = ${colors.red}
 label-muted-foreground = ${colors.foreground}
+label-muted-underline = ${colors.foreground}
+label-muted-overline = ${colors.foreground}
 label-muted-padding    = 1
+format-muted-prefix = ""
+format-muted-prefix-font = 4
+format-muted-prefix-foreground = ${colors.foreground}
+format-muted-prefix-background = ${colors.red}
+format-muted-prefix-underline = ${colors.foreground}
+format-muted-prefix-overline = ${colors.foreground}
+format-muted-prefix-padding = 0
+click-right = exec pavucontrol
 
 [module/lock]
 type = custom/text
 
 ; Label
 content = 
-content-background = ${colors.yellow}
+content-background = ${colors.orange}
 content-foreground = ${colors.foreground}
 content-padding    = 1
 
@@ -375,23 +448,11 @@ content-padding    = 1
 ; Mouse click
 click-left = i3-msg exit
 
-[module/poweroff]
-type = custom/text
-
-; Label
-content            = 
-content-background = ${colors.red}
-content-foreground = ${colors.foreground}
-content-padding    = 1
-
-; Mouse click
-click-left = poweroff
-
 [settings]
 screenchange-reload     = true
-;compositing-background = xor
-;compositing-foreground = source
-;compositing-border     = over
+; compositing-background = xor
+; compositing-foreground = source
+; compositing-border     = over
 ;pseudo-transparency    = false
 
 [global/wm]
