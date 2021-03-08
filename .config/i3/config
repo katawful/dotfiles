@@ -58,8 +58,6 @@
 # assign gaps
   gaps inner 4
   gaps outer -4
-# Assign idle behavior
- exec_always --no-startup-id ~/.config/i3/i3-scripts.sh --idle
 
 ### Autostart
 # picom
@@ -353,4 +351,6 @@
   for_window [class="steam_app_47810" instance="steam_app_47810"] move to workspace $gam
 # iTunes
   for_window [class="itunes.exe" instance="itunes.exe"] floating enable
+# CEMU
+  assign [class="steam_proton" instance="cemu.exe"] $gam
 

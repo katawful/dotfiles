@@ -140,3 +140,9 @@ export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
 export LESS='-R '
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# git info
+export GIT_AUTHOR_NAME='Kat'
+export GIT_AUTHOR_EMAIL='katisntgood@gmail.com'
+export GIT_COMMITTER_NAME='Kat'
+export GIT_COMMITTER_EMAIL='katisntgood@gmail.com'
