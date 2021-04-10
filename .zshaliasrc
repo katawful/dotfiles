@@ -60,3 +60,6 @@ alias udumount='udisksctl unmount -b'
 
 # ncdu
 alias ncdu='ncdu --color dark '
+
+# window thing
+alias window='sh /home/kat/.config/i3/i3-window.sh'

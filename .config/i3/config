@@ -69,7 +69,7 @@
 # enable polybar as the bar
   exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # start autokey at start
-  exec --no-startup-id autokey-gtk
+  # exec --no-startup-id autokey-gtk
 # use autotiling script from: https://github.com/nwg-piotr/autotiling
   exec_always --no-startup-id autotiling &
 
@@ -143,10 +143,16 @@
   bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
   bindsym $mod+minus scratchpad show
+# Show scratchpad windows
+  bindsym $mod+equal exec --no-startup-id $HOME/.config/i3/i3-menus.sh --scratch
 
 ### Hotkeys
+# Layout manager
+  bindsym $mod+Ctrl+l exec --no-startup-id i3-layout-manager
 # Open NeoVim
-  bindsym $mod+bracketleft exec --no-startup-id kitty "nvim"
+  bindsym $mod+bracketleft exec --no-startup-id kitty nvim
+# Open Vimwiki
+  bindsym $mod+bracketright exec --no-startup-id kitty nvim -c "VimwikiIndex"
 # Open ranger
   bindsym $mod+o exec --no-startup-id kitty "ranger"
 # Open FireFox
@@ -154,7 +160,7 @@
 # Open htop
   bindsym $mod+p exec --no-startup-id ~/.config/i3/i3-apps.sh --htop
   for_window [instance="^kitty$" title="^htop$"] floating enable
-  for_window [instance="^kitty$" title="^htop$"] resize set width 1100 px, resize set height 300 px
+  for_window [instance="^kitty$" title="^htop$"] resize set width 1100 px, resize set height 400 px
 # Open conky
   bindsym $mod+i exec --no-startup-id ~/.config/i3/i3-apps.sh --conky
   for_window [class="^Conky$" instance="^Conky$"] floating enable
@@ -289,19 +295,22 @@
   for_window [window_role="pop-up"] floating enable
   for_window [window_role="task_dialog"] floating enable
 # TES Construction Set rules for more reasonable usage - namely tabbed instance so less floating fighting
-  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Object Window$"]\
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="Object Window"]\
     floating disable
-  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Cell View$"]\
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="Cell View"]\
     floating disable
-  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^Render Window$"]\
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="Render Window"]\
     floating disable
-  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$" title="^TES Construction Set$"]\
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="TES Construction Set"]\
     floating disable
-    # the above are the main windows in question and shouldn't be floating, 
-    # tertiary windows like preferences or the landscape tools should be floating and rest on top
-  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] layout tabbed
-  for_window [class="^tesconstructionset.exe$" instance="^tesconstructionset.exe$"] title_format
-  for_window [class="tesconstructionset.exe" instance="^tesconstructionset.exe$" title="GlassPanelForm"] kill
+  # the above are the main windows in question and shouldn't be floating, 
+  # tertiary windows like preferences or the landscape tools should be floating and rest on top
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="TES Construction Set"] layout splith
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="Render Window"] layout splith
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="Cell View"] layout tabbed
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="Object Window"] layout tabbed
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe"] title_format
+  for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="GlassPanelForm"] kill
 # Battlefront 2
   assign [class="Wine" instance="battlefrontii.exe" title="Star Wars Battlefront II"] $gam
 # Civ 5
@@ -353,4 +362,6 @@
   for_window [class="itunes.exe" instance="itunes.exe"] floating enable
 # CEMU
   assign [class="steam_proton" instance="cemu.exe"] $gam
+# Skyrim SE/Enderal SE
+  for_window [class="steam_app_489830" instance="skyrimse.exe" title="Skyrim Special Edition"] move to workspace $gam
 

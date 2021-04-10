@@ -104,8 +104,8 @@ i3exit ()
       i3-msg exit
       ;;
     suspend)
-      # systemctl suspend
-      betterlockscreen -s dimblur
+      systemctl suspend
+      # betterlockscreen -s dimblur
       ;;
     reboot)
       systemctl reboot

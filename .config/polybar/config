@@ -52,7 +52,7 @@ font-1 = Font Awesome 5 Free Solid:size=10;2
 font-2 = FiraCode Nerd Font:style=Regular:size=16;3
 
 ; Modlues
-modules-left   = i3 
+modules-left   = i3
 modules-center = time date
 modules-right  = window-script xwindow
 
@@ -108,7 +108,7 @@ font-4 = FiraCode Nerd Font:style=Regular:size=12;2
 ; Modlues
 modules-left   = updates-arch-aur memory cpu temperature system-cpu-temppercore
 modules-center =
-modules-right  = eth pulseaudio filesystem bluetooth-script  
+modules-right  = eth pulseaudio filesystem bluetooth-script
 tray-position = right
 tray-padding = 4
 tray-maxsize = 18
@@ -184,6 +184,7 @@ label-foreground = ${colors.foreground}
 label-underline = ${colors.foreground}
 label-overline = ${colors.foreground}
 label-padding = 1
+click-left = kitty trizen -Sau
 
 [module/i3]
 type = internal/i3

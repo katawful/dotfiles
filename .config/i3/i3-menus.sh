@@ -46,15 +46,15 @@ i3windowid ()
     rownum=1	# start rownum
     # get total rows
     totrow=$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
-        sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "[[]" \
+        sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "^[[]$" \
         | tr -d "\\n[" | sed 's/--/\n/g' | grep "" -c)
     # get active window
-    win=$(xdotool getwindowfocus)
+    # win=$(xdotool getwindowfocus)
     # search through rows of marks
     while [ $rownum -le $totrow ] ;do
       # get the mark window
       markwin="$(i3-msg -t get_tree | jq '.. | objects | .id,.marks' | \
-        sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "[[]" \
+        sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "^[[]$" \
         | tr -d "\\n[" | sed 's/--/\n/g' | awk -v a="$rownum"  \
         'FNR == a {print}' | cut -d '"' -f1 | xargs)"
       # if we found the correct mark
@@ -71,7 +71,7 @@ i3windowid ()
       mark=""
     else
       mark="$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
-        sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "[[]" \
+        sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "^[[]$" \
         | tr -d "\\n[" | sed 's/--/\n/g' | awk -v a="$rownum"  \
         'FNR == a {print}' | cut -d '"' -f4 | xargs)"
 
@@ -131,18 +131,58 @@ i3createmark ()
 # Again mostly copied from EllaTheCat's config
 i3searchmark ()
 {
+  NL=$'\n'
   # Ella mentions that jq has issues but seems ok for me
-  menu="$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
-    sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "[[]" \
-    | tr -d "\\n[" | sed 's/--/\n/g')"
-  rows=$(echo "$menu" | wc -l)
-  echo "$rows"
-  pair=$(echo "${menu}" | rofi -dmenu -p "Search Marks" -i -l "$rows") 
+  window_name="$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
+    sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "^[[]$" \
+    | tr -d "\\n[" | sed 's/--/\n/g' | cut -d \" -f 2)"
+  marks="$(i3-msg -t get_tree | jq '.. | objects | .name,.marks' | \
+    sed -e '/\n/d' | sed -e '/^null/d' | sed 's/[[]]//' | grep -B1 -A1 "^[[]$" \
+    | tr -d "\\n[" | sed 's/--/\n/g' | cut -d \" -f 4)"
+  rownum=$(echo "$marks" | wc -l)
+  curr_row=1
+  output=" "
+  while [ $curr_row -le $rownum ]; do
+    curr_win=$(echo "$window_name" | awk -v a=$curr_row 'FNR == a {print}')
+    # if [ ${#curr_win} -gt 60 ]; then
+    #   curr_win="$(echo "$curr_win" | cut -c 1-60)..."
+    # fi
+    output+=$(echo " ")
+    output+=$(echo "$marks" | awk -v a=$curr_row 'FNR == a {print}')
+    output+=$(echo " ")
+    output+=$(echo "$curr_win")
+    curr_row=$((curr_row + 1))
+    output+=$(echo "
+ ")
+  done
+  output=$(echo "$output" | awk NF)
+  rows=$(echo "$output" | wc -l)
+  pair=$(echo "${output}" | rofi -dmenu -p "Search Marks" -i -l "$rows") 
 
-  for s in ${pair}; do mark=${s/,/}; done
+  mark=$(echo "$pair" | awk '{print $2}')
   if [ "_${mark}" != "_" ]; then
     i3-msg "[ con_mark=${mark} ] focus"
-    i3-msg "[ con_mark=${mark} ] move workspace to output $2"
+    # i3-msg "[ con_mark=${mark} ] move workspace to output $2"
+  fi
+}
+
+# show contents of scratchpad
+i3scratchpad(){
+  # get window names
+  window_names=$(i3-msg -t get_tree | jq '.nodes[] | .nodes[] | .nodes[] | select(.name=="__i3_scratch") | .floating_nodes[] | .nodes[] | [.name]' \
+    | grep '"' | sed s/\"//g | sed -e 's/[ \t]*//')
+  # get window ids
+  # window_ids=$(i3-msg -t get_tree | jq '.nodes[] | .nodes[] | .nodes[] | select(.name=="__i3_scratch") | .floating_nodes[] | .nodes[] | [.id]' \
+  #   | grep -B1 -A1 "^[[]$" | tr -d "[]" | awk '{print $1}' | grep -P '\d')
+  rows=$(echo "$window_names" | wc -l)
+  names=$(echo "${window_names}" | rofi -dmenu -p "Scratchpad" -i -l "$rows")
+  match=$(echo "$names")
+  id=$(i3-msg -t get_tree | jq '.nodes[] | .nodes[] | .nodes[] | select(.name=="__i3_scratch") | .floating_nodes[] | .nodes[] | [.id,.name]' \
+    | grep -F -B1 "$match" | awk 'NR==1' | sed 's/\s.//' | sed 's/\,//' | xargs)
+  echo "$id"
+  if [ "_${id}" != "_" ]; then
+    id=$(echo \""$id"\")
+    i3-msg "[ con_id=$id ] focus"
   fi
 }
 
@@ -186,4 +226,5 @@ case "$1" in
   (--create-mark) i3createmark ;;
   (--modding) openmodding ;;
   (--open) openthings ;;
+  (--scratch) i3scratchpad ;;
 esac

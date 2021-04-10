@@ -26,7 +26,7 @@ match_qstring='"[^"\\]*(\\.[^"\\]*)*"' # NOTE: Adds 1 backreference
 {
     # Run xwininfo, get window id
     window_id=`xwininfo -int | sed -nre "s/^xwininfo: Window id: ($match_int) .*$/\1/p"`
-    echo "id=$window_id"
+    # echo "id=$window_id"
 
     # Run xprop, transform its output into i3 criteria. Handle fallback to
     # WM_NAME when _NET_WM_NAME isn't set
