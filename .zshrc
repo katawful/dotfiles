@@ -146,3 +146,9 @@ export GIT_AUTHOR_NAME='Kat'
 export GIT_AUTHOR_EMAIL='katisntgood@gmail.com'
 export GIT_COMMITTER_NAME='Kat'
 export GIT_COMMITTER_EMAIL='katisntgood@gmail.com'
+
+# node
+export PATH=$PATH:./node_modules/.bin
+
+# luarocks
+eval $(luarocks path --bin)

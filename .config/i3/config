@@ -60,6 +60,8 @@
   gaps outer -4
 
 ### Autostart
+# Thunderbird
+  exec --no-startup-id thunderbird
 # picom
   exec --no-startup-id picom &
 # redshift
@@ -69,7 +71,7 @@
 # enable polybar as the bar
   exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # start autokey at start
-  # exec --no-startup-id autokey-gtk
+  exec --no-startup-id autokey-gtk
 # use autotiling script from: https://github.com/nwg-piotr/autotiling
   exec_always --no-startup-id autotiling &
 
@@ -364,4 +366,9 @@
   assign [class="steam_proton" instance="cemu.exe"] $gam
 # Skyrim SE/Enderal SE
   for_window [class="steam_app_489830" instance="skyrimse.exe" title="Skyrim Special Edition"] move to workspace $gam
-
+# Terraria
+  assign [class="Terraria.bin.x86_64" instance="Terraria.bin.x86_64"] $gam
+# MsgCompose floating
+  for_window [window_role="Msgcompose"] floating enable
+# Supraland
+  # assign [class="steam_app_813630" instance="supraland-win64-shipping.exe"] $gam
