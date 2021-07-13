@@ -30,6 +30,7 @@
   set $ws10 "10"
   set $monitor_one "DisplayPort-1"
   set $monitor_two "HDMI-A-0"
+  set $monitor_three "HDMI-A-1"
   # Colors
   set_from_resource        $fg      i3wm.color7   #f0f0f0             
   set_from_resource        $red     i3wm.color1   #f0f0f0             
@@ -46,6 +47,9 @@
   exec --no-startup-id xrandr --output $monitor_one --primary
 # set up second monitor
   exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
+# set up vertical monitor
+  exec --no-startup-id xrandr --output $monitor_three --rotate right --right-of $monitor_one
+  # exec --no-startup-id xrandr --output $monitor_three --auto --right-of $monitor_one
 # font for window titles
   font xft:fira code nerdfont 9
 # add window border for active window
@@ -60,6 +64,8 @@
   gaps outer -4
 
 ### Autostart
+# policykit
+  exec_always --no-startup-id lxqt-policykit-agent &
 # Thunderbird
   exec --no-startup-id thunderbird
 # picom
@@ -77,7 +83,7 @@
 
 ### Workspaces
 # open discord in its own workspace at start
-  workspace $dis output $monitor_one
+  workspace $dis output $monitor_three
   bindsym $mod+F1 workspace $dis
   assign [class="^discord$" instance="^discord$"] $dis
   exec --no-startup-id discord
