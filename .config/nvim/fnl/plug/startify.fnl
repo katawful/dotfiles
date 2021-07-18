@@ -46,7 +46,7 @@
 
 (let- g :startify_files_number 5)
 (let- g :startify_bookmarks 
-  {1 {:i "~/.config/nvim/init.vim"}
+  {1 {:i "~/.config/nvim/fnl/init.fnl"}
    2 {:z "~/.zshrc"}
    3 {:s "~/.config/sway/config"}
    4 {:c "~/.config/i3/config" }})
