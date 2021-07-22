@@ -160,7 +160,9 @@
 # Open NeoVim
   bindsym $mod+bracketleft exec --no-startup-id kitty nvim
 # Open Vimwiki
-  bindsym $mod+bracketright exec --no-startup-id kitty nvim -c "VimwikiIndex"
+  bindsym $mod+bracketright exec --no-startup-id kitty nvim -c +VimwikiIndex +Goyo
+# Open VimwikiDiary
+  bindsym $mod+Ctrl+d exec --no-startup-id kitty nvim -c 'let g:startify_disable_at_vimenter = 1' +VimwikiMakeDiaryNote +Goyo
 # Open ranger
   bindsym $mod+o exec --no-startup-id kitty "ranger"
 # Open FireFox
