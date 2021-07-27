@@ -150,5 +150,8 @@ export GIT_COMMITTER_EMAIL='katisntgood@gmail.com'
 # node
 export PATH=$PATH:./node_modules/.bin
 
+# gem
+export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin
+
 # luarocks
 eval $(luarocks path --bin)

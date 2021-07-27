@@ -28,9 +28,9 @@
   set $ws8 "8"
   set $ws9 "9"
   set $ws10 "10"
-  set $monitor_one "DisplayPort-1"
-  set $monitor_two "HDMI-A-0"
-  set $monitor_three "HDMI-A-1"
+  set $monitor_one "DisplayPort-2"
+  set $monitor_two "HDMI-A-2"
+  set $monitor_three "HDMI-A-3"
   # Colors
   set_from_resource        $fg      i3wm.color7   #f0f0f0             
   set_from_resource        $red     i3wm.color1   #f0f0f0             
@@ -64,6 +64,10 @@
   gaps outer -4
 
 ### Autostart
+# noisetorch
+  exec --no-startup-id noisetorch
+# droidcam
+  exec --no-startup-id droidcam &
 # policykit
   exec_always --no-startup-id lxqt-policykit-agent &
 # Thunderbird
