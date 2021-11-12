@@ -28,9 +28,9 @@
   set $ws8 "8"
   set $ws9 "9"
   set $ws10 "10"
-  set $monitor_one "DisplayPort-2"
-  set $monitor_two "HDMI-A-2"
-  set $monitor_three "HDMI-A-3"
+  set $monitor_one "DisplayPort-1"
+  set $monitor_two "HDMI-A-0"
+  set $monitor_three "HDMI-A-1"
   # Colors
   set_from_resource        $fg      i3wm.color7   #f0f0f0             
   set_from_resource        $red     i3wm.color1   #f0f0f0             
@@ -43,13 +43,15 @@
   set_from_resource        $l-gray  i3wm.color15   #f0f0f0             
 
 ### Displays
-# set up primary monitor
+# # set up primary monitor
   exec --no-startup-id xrandr --output $monitor_one --primary
-# set up second monitor
+# # set up second monitor
   exec --no-startup-id xrandr --output $monitor_two --auto --left-of $monitor_one
-# set up vertical monitor
+# # set up vertical monitor
   exec --no-startup-id xrandr --output $monitor_three --rotate right --right-of $monitor_one
   # exec --no-startup-id xrandr --output $monitor_three --auto --right-of $monitor_one
+# setup monitors
+  exec --no-startup-id $HOME/.config/i3/i3-scripts.sh --monitorsetup
 # font for window titles
   font xft:fira code nerdfont 9
 # add window border for active window
@@ -64,10 +66,13 @@
   gaps outer -4
 
 ### Autostart
+# null sink for streaming
+  exec --no-startup-id pactl load-module module-null-sink sink_name="NULL"
+  exec --no-startup-id pactl load-module module-loopback source=NULL.monitor sink=@DEFAULT_SINK@
 # noisetorch
   exec --no-startup-id noisetorch
 # droidcam
-  exec --no-startup-id droidcam &
+  # exec --no-startup-id droidcam &
 # policykit
   exec_always --no-startup-id lxqt-policykit-agent &
 # Thunderbird
@@ -77,7 +82,7 @@
 # redshift
   exec --no-startup-id redshift-gtk
 # apply wallpaper at start
-  exec --no-startup-id nitrogen --restore &
+  # exec --no-startup-id nitrogen --restore &
 # enable polybar as the bar
   exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # start autokey at start
@@ -87,6 +92,7 @@
 
 ### Workspaces
 # open discord in its own workspace at start
+  # workspace $dis output $monitor_three
   workspace $dis output $monitor_three
   bindsym $mod+F1 workspace $dis
   assign [class="^discord$" instance="^discord$"] $dis
@@ -164,9 +170,9 @@
 # Open NeoVim
   bindsym $mod+bracketleft exec --no-startup-id kitty nvim
 # Open Vimwiki
-  bindsym $mod+bracketright exec --no-startup-id kitty nvim -c +VimwikiIndex +Goyo
+  bindsym $mod+bracketright exec --no-startup-id kitty --class vimwiki nvim -c +VimwikiIndex +Goyo
 # Open VimwikiDiary
-  bindsym $mod+Ctrl+d exec --no-startup-id kitty nvim -c 'let g:startify_disable_at_vimenter = 1' +VimwikiMakeDiaryNote +Goyo
+  bindsym $mod+Ctrl+d exec --no-startup-id kitty --class vimwiki nvim -c 'let g:startify_disable_at_vimenter = 1' +VimwikiMakeDiaryNote +Goyo 
 # Open ranger
   bindsym $mod+o exec --no-startup-id kitty "ranger"
 # Open FireFox
@@ -305,6 +311,9 @@
   bindsym $mod+r mode "resize"
 
 ### Rules
+# vimwiki
+  for_window [class="vimwiki"] floating enable
+  for_window [class="vimwiki"] resize set 1200 900
 # Dialog Window Floating
   for_window [window_role="pop-up"] floating enable
   for_window [window_role="task_dialog"] floating enable
@@ -326,61 +335,63 @@
   for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe"] title_format
   for_window [class="tesconstructionset.exe" instance="tesconstructionset.exe" title="GlassPanelForm"] kill
 # Battlefront 2
-  assign [class="Wine" instance="battlefrontii.exe" title="Star Wars Battlefront II"] $gam
+  # assign [class="Wine" instance="battlefrontii.exe" title="Star Wars Battlefront II"] $gam
 # Civ 5
-  assign [class="Civ5XP" instance="Civ5XP" title="Sid Meier's Civilization V"] $gam
+  # assign [class="Civ5XP" instance="Civ5XP" title="Sid Meier's Civilization V"] $gam
 # Hollow Knight
-  assign [class="hollow_knight.x86_64" instance="hollow_knight.x86_64" title="Hollow Knight"] $gam
+  # assign [class="hollow_knight.x86_64" instance="hollow_knight.x86_64" title="Hollow Knight"] $gam
 # Final Fantasy X
   for_window [class="ffx&x-2_launcher.exe"] floating enable
   for_window [class="steam_app_359870" instance="ffx&x-2_launcher.exe" title="FINAL FANTASY X/X-2 LAUNCHER"]\
     floating enable
 # Fallout NV
-  assign [class="steam_app_22380" instance="falloutnv.exe" title="Fallout: New Vegas"] $gam
+  # assign [class="steam_app_22380" instance="falloutnv.exe" title="Fallout: New Vegas"] $gam
 # Oblivion
-  assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $gam
+  # assign [class="^oblivion.exe$" instance="^oblivion.exe$" title="^Oblivion$"] $gam
 # Dolphin-emu
-  assign [class="^dolphin-emu$" instance="^dolphin-emu$"] $gam
-  for_window [class="dolphin-emu"] move to workspace $gam
+  # assign [class="^dolphin-emu$" instance="^dolphin-emu$"] $gam
+  # for_window [class="dolphin-emu"] move to workspace $gam
 # PCSX2
   for_window [class="PCSX2"] border normal 3
 # bsnes
-  assign [class="Hiro" instance="hiro"] $gam
+  # assign [class="Hiro" instance="hiro"] $gam
 # DUSK
-  assign [class="^DUSK.x86_64$" instance="^DUSK.x86_64$"] $gam
+  # assign [class="^DUSK.x86_64$" instance="^DUSK.x86_64$"] $gam
 # Black Mesa
-  assign [class="^bms_linux$" title="^Black Mesa - OpenGL$"] $gam
+  # assign [class="^bms_linux$" title="^Black Mesa - OpenGL$"] $gam
 # Pac-Man 256
-  assign [title="^PAC-MAN256$"] $gam
+  # assign [title="^PAC-MAN256$"] $gam
 # Spore Galactic Adventures
-  for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"]\
-    move to workspace $gam
+  # for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"]\
+    # move to workspace $gam
   for_window [class="steam_app_24720" instance="sporeapp.exe" title="SPORE™ Galactic Adventures"]\
     floating disable, exec xdotool search --name "SPORE" set_window --name "Spore"
 # Daggerfall Unity
-  assign [class="^DaggerfallUnity.x86_64$" title="^Daggerfall Unity$"] $gam
+  # assign [class="^DaggerfallUnity.x86_64$" title="^Daggerfall Unity$"] $gam
 # Fallout 76
-  for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] move to workspace $gam
+  # for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] move to workspace $gam
   for_window [class="steam_app_1151340" instance="fallout76.exe" title="Fallout76"] floating disable
 # Minecraft - class is version dependent so I'll have to fix that somehow
-  assign [class="^Minecraft" instance="^Minecraft"] $gam
-  for_window [class="minecraft-launcher" instance="Minecraft Launcher" title="Minecraft Launcher"]\
-    move to workspace $gam
+  # assign [class="^Minecraft" instance="^Minecraft"] $gam
+  # for_window [class="minecraft-launcher" instance="Minecraft Launcher" title="Minecraft Launcher"]\
+    # move to workspace $gam
 # Stardew Valley
-  assign [class="StardewValley.bin.x86_64" instance="StardewValley.bin.x86_64"] $gam
+  # assign [class="StardewValley.bin.x86_64" instance="StardewValley.bin.x86_64"] $gam
 # Dragon Age: Origins
-  assign [class="steam_app_47810" instance="steam_app_47810"] $gam
+  # assign [class="steam_app_47810" instance="steam_app_47810"] $gam
   for_window [class="steam_app_47810" instance="steam_app_47810"] floating enable
-  for_window [class="steam_app_47810" instance="steam_app_47810"] move to workspace $gam
+  # for_window [class="steam_app_47810" instance="steam_app_47810"] move to workspace $gam
 # iTunes
   for_window [class="itunes.exe" instance="itunes.exe"] floating enable
 # CEMU
-  assign [class="steam_proton" instance="cemu.exe"] $gam
+  # assign [class="steam_proton" instance="cemu.exe"] $gam
 # Skyrim SE/Enderal SE
-  for_window [class="steam_app_489830" instance="skyrimse.exe" title="Skyrim Special Edition"] move to workspace $gam
+  # for_window [class="steam_app_489830" instance="skyrimse.exe" title="Skyrim Special Edition"] move to workspace $gam
 # Terraria
-  assign [class="Terraria.bin.x86_64" instance="Terraria.bin.x86_64"] $gam
+  # assign [class="Terraria.bin.x86_64" instance="Terraria.bin.x86_64"] $gam
 # MsgCompose floating
   for_window [window_role="Msgcompose"] floating enable
 # Supraland
   # assign [class="steam_app_813630" instance="supraland-win64-shipping.exe"] $gam
+# floating window center
+  for_window [floating] move position center

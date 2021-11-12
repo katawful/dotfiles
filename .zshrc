@@ -16,7 +16,7 @@ export ZSH="/home/kat/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-source ~/.zsh-theme-gruvbox-material-dark
+# source ~/.zsh-theme-gruvbox-material-dark
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -155,3 +155,7 @@ export PATH=$PATH:~/.local/share/gem/ruby/3.0.0/bin
 
 # luarocks
 eval $(luarocks path --bin)
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

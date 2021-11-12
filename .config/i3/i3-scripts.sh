@@ -34,6 +34,26 @@ i3secondmonitor ()
 	fi
 }
 
+i3multimonitor ()
+{
+	MON_LIST=$(xrandr --listactivemonitors | awk {'print $4'})
+	total=$(echo "$MON_LIST" | wc -l)
+	MON_ONE=$(echo "$MON_LIST" | awk 'FNR == 2 {print}')
+	MON_TWO=$(echo "$MON_LIST" | awk 'FNR == 3 {print}')
+	MON_THREE=$(echo "$MON_LIST" | awk 'FNR == 4 {print}')
+	# sleep 2
+	# xrandr --output "$MON_ONE" --primary --pos 1920x420
+	# xrandr --output "$MON_TWO" --pos 0x420
+	# xrandr --output "$MON_THREE" --rotate right --pos 3840x0
+	sleep 2
+	xrandr --output "$MON_ONE" --primary --pos 0x420
+	xrandr --output "$MON_TWO" --pos 0x420 --left-of "$MON_ONE"
+	xrandr --output "$MON_THREE" --pos 2760x0 --rotate right --right-of "$MON_THREE"
+	sleep 2
+	nitrogen --restore &
+
+}
+
 i3idle() {
   # Run xidlehook
   xidlehook \
@@ -50,4 +70,5 @@ i3idle() {
 case "$1" in
 	(--second) i3secondmonitor ;;
     (--idle) i3idle ;;
+		(--monitorsetup) i3multimonitor ;;
 esac
