@@ -66,6 +66,8 @@
   gaps outer -4
 
 ### Autostart
+# nm-applet
+  exec --no-startup-id nm-applet &
 # null sink for streaming
   exec --no-startup-id pactl load-module module-null-sink sink_name="NULL"
   exec --no-startup-id pactl load-module module-loopback source=NULL.monitor sink=@DEFAULT_SINK@
@@ -181,10 +183,6 @@
   bindsym $mod+p exec --no-startup-id ~/.config/i3/i3-apps.sh --htop
   for_window [instance="^kitty$" title="^htop$"] floating enable
   for_window [instance="^kitty$" title="^htop$"] resize set width 1100 px, resize set height 400 px
-# Open conky
-  bindsym $mod+i exec --no-startup-id ~/.config/i3/i3-apps.sh --conky
-  for_window [class="^Conky$" instance="^Conky$"] floating enable
-  for_window [class="^Conky$" instance="^Conky$"] resize set width 500 px, resize set height 1000 px, focus
 # Open PAVU floating
   bindsym $mod+F9 exec --no-startup-id pavucontrol
   for_window [class="Pavucontrol" instance="pavucontrol" title="Volume Control"] floating enable
