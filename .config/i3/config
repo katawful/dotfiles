@@ -55,7 +55,7 @@
 # font for window titles
   font xft:fira code nerdfont 9
 # add window border for active window
-  for_window [class=".*"] border pixel 3 
+  for_window [class=".*"] border pixel 3
 #client.type             border   background    text     indicator  childborder
   client.focused           $teal    $teal    $gray $orange
   client.focused_inactive  $l-gray  $l-gray  $gray  $l-gray
@@ -66,6 +66,11 @@
   gaps outer -4
 
 ### Autostart
+# sc-controller
+  # exec --no-startup-id sc-controller &
+  assign [class="SC Controller" instance="SC Controller" title="SC Controller"] $ws2
+# pegasus
+  # exec --no-startup-id pegasus-fe &
 # nm-applet
   exec --no-startup-id nm-applet &
 # null sink for streaming
@@ -167,6 +172,8 @@
   bindsym $mod+equal exec --no-startup-id $HOME/.config/i3/i3-menus.sh --scratch
 
 ### Hotkeys
+# emoji picker
+  bindsym $mod+Ctrl+e exec --no-startup-id emoji-picker
 # Layout manager
   bindsym $mod+Ctrl+l exec --no-startup-id i3-layout-manager
 # Open NeoVim
@@ -309,6 +316,8 @@
   bindsym $mod+r mode "resize"
 
 ### Rules
+# Resolve
+  for_window [class="resolve" instance="resolve" title="Edit Marker"] floating disable
 # vimwiki
   for_window [class="vimwiki"] floating enable
   for_window [class="vimwiki"] resize set 1200 900
